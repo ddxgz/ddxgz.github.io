@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<title>Lea Verou's r谷sum谷</title>
+<meta name="viewport" content="width=device-width" />
+<style>
+/**
+ * "Variables"
+ */
+h1, h2, .date {
+	font: small-caps normal 100% Constantia, 'Palatino Linotype', Palatino, Georgia, serif;
+}
+
+h1, 
+header > h1 > span,
+header > ul > li:before {
+	color: #9BBB59;
+}
+ 
+/**
+ * Style
+ */
+
+* { margin:0; }
+
+html {
+	background: #9BA2B0;
+	font-size: 14px;
+}
+
+body {
+	width: 45em;
+	padding: 7em 10%;
+	margin: 1em auto;
+	background: white;
+	box-shadow: 1px 1px 5px 2px rgba(0,0,0,.3);
+	font: 100%/1.5 'Segoe UI', Optima, 'Hiragino Kaku Gothic Pro', 'Apple Gothic', Tahoma, 'Helvetica Neue', sans-serif;
+	
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	-o-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	
+	-moz-transition: .5s font-size;
+	-ms-transition: .5s font-size;
+	-o-transition: .5s font-size;
+	-webkit-transition: .5s font-size;
+	transition: .5s font-size;
+}
+
+h1 {
+	margin-top: 1.2em;
+	font-size: 180%;
+}
+
+h2 {
+	margin-top: 1em;
+	font-size: 150%;
+}
+
+a {
+	color:#4F6128;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted #4F6128;
+	cursor: help;
+}
+
+p {
+	margin: .6em 0;
+}
+
+h1 + p {
+	margin-top: 0;
+}
+
+ul {
+	padding: 0;
+	list-style: square;
+}
+
+header {
+	text-align: center;
+}
+
+	header > h1 {
+		color: #7F7F7F;
+		border-bottom: 1px solid #9BBB59;
+		margin: 0 0 .15em;
+		text-indent: 1.2em;
+		font-size: 450%;
+		line-height: 1.05;
+		font-variant: normal;
+	}
+	
+		header > h1 > span {
+			display: inline-block;
+			margin-left: -2.7em;
+			vertical-align: super;
+			font-size: 50%;
+		}
+		
+	header > ul {
+		display: block;
+		margin-bottom: .5em;
+	}
+	
+		header > ul > li {
+			display: inline;
+			list-style: none;
+		}
+		
+		header > ul > li:before {
+			content: '♂ ';
+		}
+		
+		header > ul > li:first-child:before {
+			content: none;
+		}
+	
+	address {
+		font-style: normal;
+	}
+	
+ol.timeline {
+	padding: 0;
+	border: 0 solid #ddd;
+	border-width: 4px 0;
+}
+
+	ol.timeline > li {
+		list-style: none;
+		padding: .4em 0;
+		border: 1px solid white; /* Chrome printing bug */
+		border-top-color: #ccc;
+	}
+	
+	ol.timeline > li:first-child {
+		border-top: 0;
+	}
+	
+		ol.timeline > li > p {
+			margin: 0;
+		}
+		
+		ol.timeline > li > .date {
+			float: left;
+			margin-left: .1em;
+			max-width: 8rem;
+			color: gray;
+			font-size: 110%;
+		}
+	
+		ol.timeline > li > .date ~ p {
+			margin-left: 9rem;
+		}
+		
+.note {
+	margin-top: .4em;
+	font-size: 75%;
+}
+
+	.note a:not(:hover):not(:active) {
+		color: inherit;
+	}
+
+footer {
+	margin-top: 3em;
+	font-style: italic;
+}
+
+.amp {
+	font-style: italic;
+}
+
+@media (max-width:950px) {
+	html { font-size: 12px; }
+}
+
+@media (max-width:700px) {
+	html { font-size: 11px; }
+}
+
+@media (max-width:600px) {
+	body { width: auto; margin: 1em; }
+}
+
+@media print {
+	body {
+		box-shadow: none;	 
+	}
+	
+	header > h1 {
+		color: black;
+	}
+}
+</style>
+
+</head>
+<body>
+
+<header>
+	<h1>Cong Peng <span>CV</span></h1>
+	<ul>
+		<li><a href="mailto:lea@w3.org">lea@w3.org</a></li>
+		<li><a href="http://lea.verou.me">lea.verou.me</a></li>
+		<li><a href="http://twitter.com/leaverou">@LeaVerou</a></li>
+		<li><a href="https://github.com/leaverou">Github</a></li>
+		<li><a href="http://dribbble.com/leaverou">Dribbble</a></li>
+	</ul>
+</header>
+
+<section id="summary">
+	<h1>Summary</h1>
+	<p>I'm passionate about <strong>open web standards</strong>. I love <strong>researching</strong> new ways to use them, <strong>educating</strong> other developers about their advances and making <strong>open source tools</strong> to ease working with them.
+	My work has repeatedly earned <strong>international acclaim</strong> in the front-end web development industry.</p>
+	<p>I'm currently writing an advanced CSS book for <strong><a href="http://oreilly.com/">O＊Reilly</a></strong>. In the past, I've worked at <strong><a href="http://w3.org">W3C/MIT</a></strong> on Developer Relations and Web education. I＊m also among the five Invited Experts of the <a href="http://www.w3.org/Style/CSS/members.en.php3">W3C CSS Working Group</a> worldwide.
+	</p>
+</section>
+
+<section id="work-experience">
+	<h1>Work experience</h1>
+	<ol class="timeline">
+		<li>
+			<p class="date">2011每2012<br>2013-Present</p>
+			<p>Independent open web evangelist, front-end engineer</p>
+			<p class="note">Speaking, writing, doing corporate training and workshops about open web standards. Occasionally freelancing.</p>
+		</li>
+		<li>
+			<p class="date">2012每2013</p>
+			<p>Developer Relations  ? <a href="http://w3.org">W3C/MIT</a></p>
+			<p class="note">Educating web professionals about open web standards and facilitating community input for W3C specifications under development.</p>
+		</li>
+		<li>
+			<p class="date">2008每2011</p>
+			<p>Co-founder, lead web-developer &amp; designer ? <a href="http://fresset.gr">Fresset Ltd</a></p>
+			<p class="note">Created the successful Greek community <a href="http://e-steki.gr">e-steki.gr</a>, which regularly receives over 400,000 visits and 2,500,000 pageviews per month.</p>
+		</li>
+	</ol>
+</section>
+
+<section id="speaking">
+	<h1>Speaking</h1>
+	<p>Speaker at some of the <strong>most prominent international</strong> web development conferences, including:</p>
+	<ul>
+		<li><a href="http://sxsw.com">SXSW</a> in Austin, TX</li>
+		<li><a href="http://aneventapart.com/event/boston-2013">An Event Apart </a> in Boston, MA</li>
+		<li><a href="http://futureofwebdesign.com/london-2013">Future Of Web Design</a> in London, UK</li>
+		<li><a href="http://jsconf.eu/2011/polyfilling_the_gaps.html">JSConf EU</a> in Berlin, Germany</li>
+		<li><a href="http://atmedia11.webdirections.org/program/design/#css3-at-the-outer-rim">Web Directions @media</a> in London, UK</li>
+		<li><a href="http://fronteers.nl/congres/2011/speakers#lea-verou">Fronteers</a> in Amsterdam, Netherlands</li>
+		<li><a href="http://2012.texasjavascript.com/">TXJS</a> in Austin, Texas</li>
+		<li><a href="http://fluentconf.com/fluent2012/public/schedule/speaker/133766">O＊Reilly Fluent</a> in San Fransisco, California</li>
+	</ul>
+	<p>My talks get <strong>enthusiastic reviews</strong>, by both attendees and field experts. My ※<a href="http://vimeo.com/31719130">CSS3 secrets</a>§ talk was listed in <a href="http://www.netmagazine.com/features/2011-review-15-web-conference-talks-you-need-watch">.net magazine＊s 15 best talks of 2011</a> and my ※<a href="http://vimeo.com/70171266">The humble border-radius</a>§ talk was <a href="https://thenetawards.com/vote/talk/">shortlisted in The net awards 2014 as ※Conference Talk of the Year§</a>.</p>
+	<p>For more information, please refer to <a href="http://lea.verou.me/speaking">the ※Speaking§ section on my website</a>.</p>
+</section>
+
+<section id="industry-recognition">
+	<h1>Industry recognition</h1>
+	<ul>
+		<li>Invited Expert at the <a href="http://www.w3.org/Style/CSS/members.en.php3">W3C CSS Working Group</a>, which defines and extends the CSS language.</li>
+		<li>Finalist in <strong>The net Awards 2011</strong> for the ※<strong>Brilliant newcomer</strong>§ category.</li>
+		<li>Finalist in <strong>The net awards 2014</strong> for the ※<strong>Outstanding contribution</strong>§ and ※<strong>Conference Talk of the Year</strong>§ categories</li>
+		<li>Active follower base of <a href="http://twitter.com/#!/LeaVerou/followers">48,000+ people on twitter</a></li>
+		<li>Interviewed by leading industry media, such as <a href="http://www.netmagazine.com/interviews/lea-verou-future-css-and-more">.net magazine</a>, <a href="http://www.sitepoint.com/podcast-139-experimenting-with-css3-with-lea-verou/">Sitepoint</a>, <a href="css-tricks.com/14792-five-questions-with-lea-verou/">CSS-Tricks</a>, <a href="http://5by5.tv/bigwebshow/94">The Big Web Show</a> and <a href="http://5by5.tv/webahead/58">The Web Ahead</a></li>
+		<li>My work has been featured by almost every significant website &amp; magazine in the industry. I collect some of these mentions in <a href="http://lea.verou.me/press">the ※Press§ section on my website</a> (infrequently updated).
+	</ul>
+</section>
+
+<section id="judging">
+	<h1>Judging <span class="amp">&amp;</span> reviewing</h1>
+	<ul>
+		<li>Judge in <strong>The .net Awards 2011 and 2014</strong>.</li>
+		<li>Member of <a href="http://smashingmagazine.com">Smashing Magazine</a>＊s Experts Panel.</li>
+		<li>Invited ※expert judge§ for <a href="https://developer.mozilla.org/en-US/demos/devderby#tab-judging">Mozilla's DevDerby monthly competitions</a> (2011-2012).</li>
+		<li>Program committee for O＊Reilly Velocity EU conference 2012 and <a href="http://fluentconf.com/fluent2012/public/content/about">O＊Reilly Fluent conference 2012</a>. Advisory Board for O＊Reilly Fluent conference 2014.</li>
+		<li>Technical reviewer for <strong>O＊Reilly</strong>. I have reviewed ※<a href="http://www.amazon.com/Maintainable-JavaScript-Nicholas-C-Zakas/dp/1449327680">Maintainable JavaScript</a>§ by Nicholas Zakas and ※<a href="http://shop.oreilly.com/product/0636920018421.do">JavaScript Web Applications</a>§ by Alex MacCaw.</li>
+		<li><a href="http://awwwards.com/jury/4">Awwwards jury</a></li>
+	</ul>
+</section>
+
+<section id="writing">
+	<h1>Publications</h1>
+	
+	<h2>Books</h2>
+	<ul>
+		<li>Currently writing a book on advanced CSS (※CSS Secrets§) for <a href="http://oreilly.com">O＊Reilly</a></li>
+		<li>Chapter in <a href="https://shop.smashingmagazine.com/smashing-book-3.html">Smashing Book #3</a> (with David Storey): ※Restyle, Recode, Reimagine With CSS3§</li>
+	</ul>
+	
+	<h2>Articles</h2>
+	I have written articles for some of the biggest industry media, including:
+	<ul>
+		<li><a href="http://alistapart.com">A List Apart</a></li>
+		<li><a href="http://smashingmagazine.com">Smashing Magazine</a></li>
+		<li><a href="http://24ways.org">24 Ways</a></li>
+		<li><a href="http://netmagazine.com">.net magazine</a></li>
+	</ul>
+	
+	<p>You can find a more complete list of my articles <a href="http://lea.verou.me/writing">on my website</a>.</p>
+</section>
+
+<section id="demos">
+	<h1>Selected projects</h1>
+	<ol class="timeline">
+		<li>
+			<p class="date">Jul 2012</p>
+			<p><a href="http://prismjs.com">Prism</a>: A beautiful, standards-compliant, extensible syntax highlighter</p>
+			<p class="note">23,000 unique visitors on its first day. <a href="http://www.webmonkey.com/2012/07/prism-beautiful-code-highlighting-for-the-web/">WebMonkey</a> devoted an entire new post to it. Used in big industry websites like <a href="http://alistapart.com">A List Apart</a> and <a href="http://smashingmagazine.com">Smashing Magazine</a> as well as <a href="https://brendaneich.com/2012/10/harmony-of-dreams-come-true/">Brendan Eich＊s (creator of JavaScript) blog</a></p>
+		</li>
+		<li>
+			<p class="date">Feb 2012</p>
+			<p><a href="http://css3test.com">The CSS3 Test</a>: High coverage testsuite for the most stable CSS3 modules.</p>
+			<p class="note">50,000 unique visitors on its launch (first two days). <a href="http://css3.info">CSS3.info</a> and other popular media devoted an entire new post to it.</p>
+		</li>
+		<li>
+			<p class="date">Dec 2011</p>
+			<p><a href="http://dabblet.com">dabblet</a>: An interactive CSS playground that saves to Github gists.</p>
+			<p class="note">Dabblet＊s release received enthusiastic feedback from the community, and was publicised by popular industry media like <a href="http://www.webmonkey.com/2011/12/dabblet-an-interactive-css-playground-in-your-browser/">Wired.com＊s WebMonkey</a>, <a href="http://css-tricks.com/dabblet/">CSS-Tricks</a>, <a href="http://www.smashingmagazine.com/smashing-newsletter-issue-50/">Smashing Magazine</a> and others.
+			During its first month, it received more than 65,000 unique visitors, 15,000 of which during its first two days.</p>
+		</li>
+		<li>
+			<p class="date">Oct 2011</p>
+			<p><a href="http://leaverou.github.com/animatable">Animatable</a>: A community-curated collection of single-property transition effects.</p>
+		</li>
+		<li>
+			<p class="date">Oct 2011</p>
+			<p><a href="http://leaverou.github.com/prefixfree">-prefix-free</a>: A library that adds vendor prefixes to CSS using feature detection</p>
+			<p class="note">-prefix-free was featured in <a href="http://coding.smashingmagazine.com/2011/10/12/prefixfree-break-free-from-css-prefix-hell/">Smashing Magazine</a> <a href="http://www.smashingmagazine.com/2011/10/28/useful-coding-workflow-tools-for-web-designers-developers/">twice</a>. <strong>Eric Meyer</strong> <a href="http://twitter.com/#!/meyerweb/status/124618575263711232">said</a> about it ※It＊s fantastic, top-notch work! Thank you for creating and sharing it.§.
+		</li>
+		<li>
+			<p class="date">Sep 2011</p>
+			<p><a href="http://cubic-bezier.com">cubic-bezier.com</a>: Generating, storing and sharing bezier-based easing functions</p>
+		</li>
+		<li>
+			<p class="date">Sep 2011</p>
+			<p><a href="http://leaverou.github.com/chainvas">Chainvas</a>: Tiny (1KB) general purpose chaining library</p>
+			<p class="note">※Lea, you're too damned good.  I would never have thought to make a general-purpose chaining library.§ 〞<a href="http://lea.verou.me/2011/09/chainvas-make-apis-chainable-enhance-the-canvas-api/#comment-307243959">Tab Atkins</a>
+		</li>
+		<li>
+			<p class="date">Apr 2011</p>
+			<p><a href="http://lea.verou.me/css3patterns">CSS3 Patterns Gallery</a>: Using CSS3 to generate background patterns</p>
+			<p class="note">My patterns gallery received lots of publicity. It was featured in Smashing Magazine multiple times and mentioned in conference talks by a number of industry leaders. It was used by Opera Software to fine-tune their CSS gradients implementation.</p>
+		</li>
+	</ol>
+	<p>A lot more of my open source web applications, libraries and demos can be found in <a href="https://github.com/leaverou">my Github account</a>.
+</section>
+
+<section id="technical-skills">
+	<h1>Technical skills</h1>
+	<p>I have a broad understanding of the full Open Web Stack of technologies, including:</p>
+	<ul>
+		<li>CSS (including CSS3)</li>
+		<li>JavaScript (ECMAScript), DOM &amp; related APIs, libraries like jQuery</li>
+		<li>HTML5 and related APIs</li>
+		<li>XML technologies, including SVG and MathML</li>
+		<li>WAI-ARIA</li>
+	</ul>
+	<p>I also have experience with a wide range of programming languages and technologies, including PHP, SQL, Java and many more.</p>
+</section>
+
+<section id="volunteer-work">
+	<h1>Volunteering</h1>
+	<ol class="timeline">
+		<li>
+			<p class="date">2011每Present</p>
+			<p>Volunteer for <strong>Opera Software</strong> (Spectran) under NDA.</p>
+			<p class="note">Opera Spectrans focus on Opera＊s support for the various W3C specifications.</p>
+		</li>
+		<li>
+			<p class="date">2010每2012</p>
+			<p>Teaching Assistant ? <a href="http://aueb.gr"><abbr title="Athens University of Economics and Business">AUEB</abbr></a></p>
+			<p class="note">Co-designed every aspect of the ※Web Technologies and Programming§ 4th year undergraduate course, including syllabus and coursework. Guest lectured the CSS parts. [<a href="http://lea.verou.me/2010/07/organizing-a-university-course-on-modern-web-development/">Details</a>]</p>
+		</li>
+		<li>
+			<p class="date">2009每Present</p>
+			<p>Contributed numerous CSS &amp; JavaScript bug reports for <strong>Gecko</strong>, <a href="https://bugs.webkit.org/buglist.cgi?query_format=advanced&short_desc_type=allwordssubstr&short_desc=&long_desc_type=allwordssubstr&long_desc=&bug_file_loc_type=allwordssubstr&bug_file_loc=&keywords_type=allwords&keywords=&bug_status=NEW&bug_status=ASSIGNED&bug_status=REOPENED&bug_status=RESOLVED&bug_status=VERIFIED&resolution=FIXED&resolution=LATER&resolution=---&emailreporter1=1&emailtype1=regexp&email1=%28me%40lea%7Clea%40%29verou.me&emailreporter2=1&emailtype2=substring&email2=&bugidtype=include&bug_id=&chfieldfrom=&chfieldto=Now&chfieldvalue=&cmdtype=doit&order=Reuse+same+sort+as+last+time&remtype=asdefault&field0-0-0=noop&type0-0-0=noop&value0-0-0=">WebKit</a> and <strong>Presto</strong>.</p>
+		</li>
+	</ol>
+</section>
+
+<section id="academic-distinctions">
+	<h1>Academic distinctions</h1>
+	<ol class="timeline">
+		<li>
+			<p class="date">2010</p>
+			<p>I was one of the <a href="http://stanford.edu/group/hellas/cgi-bin/wp/?p=863">9 students</a> (out of hundreds of applicants) that were selected by Hell.A.S. to attend courses at <strong>Stanford University</strong> for a week.</p>
+		</li>
+		<li>
+			<p class="date">2000每2004</p>
+			<p>Yearly distinctions in the Hellenic Mathematical Society contests, up to <strong>2<sup>nd</sup> place</strong> nationally. Qualification to its premilinary contest for <strong>Balkan Mathematical Olympiad</strong> in 2004.
+		</li>
+	</ol>
+</section>
+
+<section id="education">
+	<h1>Education</h1>
+	<ol class="timeline">
+		<li>
+			<p class="date">2014每2020 (Expected)</p>
+			<p><strong>Ph.D in Computer Science</strong> (Starting September 2014)</p>
+			<p class="note"><a href="http://mit.edu">Massachusetts Institute of Technology (MIT)</a></p>
+		</li>
+		<li>
+			<p class="date">2007每2013</p>
+			<p><strong>B.Sc. in Computer Science</strong> (GPA: 8.4/10, top 3%)</p>
+			<p>Thesis: <q><a href="http://thesis.dabblet.com">Dabblet: A visual IDE for rapid prototyping of client-side web development</a></q>, Advisor: Vasilis Vassalos</p>
+			<p class="note">Athens University of Economics and Business</p>
+		</li>
+		<li>
+			<p class="date">2004每2006</p>
+			<p>First 2 years of <strong>Diploma of Electrical and Computer Engineering</strong></p>
+			<p class="note">Aristotle University of Thessaloniki</p>
+		</li>
+	</ol>
+</section>
+
+<section id="languages">
+	<h1>Languages</h1>
+	<ul>
+		<li><strong>Greek</strong>: Native</li>
+		<li><strong>English</strong>: Very fluent
+		<p class="note">TOEFL score: 115/120, Certificate of Proficiency in English, University of Michigan, 2001)</p>
+		</li>
+	</ul>
+</section>
+
+<section id="interests">
+	<h1>Professional interests</h1>
+	<p>Open web standards, 
+	user experience, UI design,
+	web development education, 
+	front-end web development,
+	API design, 
+	web accessibility, 
+	technical writing, 
+	graphic design, color theory, typography</p>	
+</section>
+
+<footer>
+	<p>References are available upon request.</p>
+</footer>
+
+<script>
+(function(){
+	if(!document.querySelectorAll) return;
+	var external = document.querySelectorAll('a[href^="http://"], a[href^="https://"]'), a;
+	for(var i=external.length; a=external[--i];) a.setAttribute('target', '_blank');
+})();
+</script>
+</body>
+</html>
