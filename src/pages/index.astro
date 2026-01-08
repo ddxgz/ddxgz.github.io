@@ -25,7 +25,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
     <section id="hero" class="pt-8 pb-6">
       <div class="flex flex-wrap items-baseline gap-x-3 gap-y-2">
         <!-- <h1 class="my-0 inline-block text-4xl font-bold sm:text-5xl"> -->
-          {SITE.author}
+        {SITE.author}
         <!-- </h1> -->
         <span class="text-sm opacity-80">Stockholm, Sweden</span>
       </div>
@@ -34,11 +34,13 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         Senior AI Engineer / Solution Architect
       </p> -->
       <p class="mt-2">
-        I’m a Engineer / Architect / Builder. For more details about me,
-        see <a href="/about">About</a>.
+        I’m a Engineer / Architect / Builder. For more details about me, see <a
+          href="/about">About</a
+        >.
       </p>
       <p class="mt-2">
-        This is a reboot for writing my notes and thoughts online after several years of pause.
+        This is a reboot for writing my notes and thoughts online after several
+        years of pause.
       </p>
 
       <!-- <div class="mt-6 flex flex-wrap gap-3">
@@ -80,7 +82,8 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
     <Hr />
 
-    {/*
+    {
+      /*
       <section id="highlights" class="pt-12 pb-6">
         <h2 class="text-2xl font-semibold tracking-wide">Highlights</h2>
         <ul class="mt-4 list-disc ps-5">
@@ -101,7 +104,8 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       </section>
 
       <Hr />
-    */}
+    */
+    }
 
     {
       featuredPosts.length > 0 && (

@@ -1,5 +1,5 @@
 export const SITE = {
-  website: "https://ddxgz.github.io", 
+  website: "https://ddxgz.github.io",
   author: "Cong Peng",
   profile: "https://www.linkedin.com/in/cong-peng-pcx/",
   desc: "A reboot for writing my notes and thoughts online after several years of pause.",

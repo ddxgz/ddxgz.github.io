@@ -16,7 +16,7 @@ export default defineConfig({
   site: SITE.website,
   // Uncomment the following line when deploying to GitHub Pages
   // base: '/pcx-astro-paper-github',
-  base: '/',
+  base: "/",
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),

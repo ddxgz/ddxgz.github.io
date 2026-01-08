@@ -13,5 +13,3 @@ canonicalURL: https://pcx.linkedinfo.co/post/fraud-detection/
 This is a preserved post from my legacy site. The original (full) article is here:
 
 - [A Walk Through of the IEEE-CIS Fraud Detection Challenge](https://pcx.linkedinfo.co/post/fraud-detection/)
-
-

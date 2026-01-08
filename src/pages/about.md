@@ -3,24 +3,23 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-I’m Cong Peng, an Engineer / Architect / Builder based in Stockholm. I build agentic AI applications and the cloud data & AI platforms behind them. I lead architecture and hands-on implementation from MVP to production. 
+I’m Cong Peng, an Engineer / Architect / Builder based in Stockholm. I build agentic AI applications and the cloud data & AI platforms behind them. I lead architecture and hands-on implementation from MVP to production.
 
 Currently building [Actorise](https://www.actorise.com).
-
 
 ## Some consulting projects
 
 ### Agent AI apps
 
 - Built multi-agent data analytics solution where a supervisor plans tasks and sub-agents iteratively generate/execute SQL and synthesize reports
-- Shipped production RAG as a reusable reference implementation, combining context engineering, retrieval design, evaluation/guardrails, and observability 
-- Delivered LLM-powered workflow automation integrated via async APIs and secure enterprise integration patterns 
+- Shipped production RAG as a reusable reference implementation, combining context engineering, retrieval design, evaluation/guardrails, and observability
+- Delivered LLM-powered workflow automation integrated via async APIs and secure enterprise integration patterns
 
 ### AgentOps / MLOps / DataOps in the cloud
 
-- Designed platform patterns for fast provisioning, CI/CD, governance, and operational guardrails for AI apps across teams 
-- Established end-to-end lifecycle foundations to operationalize data, models and agents with reusable pipelines and quality monitoring 
-- Extended regulated enterprise platforms to adopt GenAI safely, focusing on architecture, security, and delivery standards 
+- Designed platform patterns for fast provisioning, CI/CD, governance, and operational guardrails for AI apps across teams
+- Established end-to-end lifecycle foundations to operationalize data, models and agents with reusable pipelines and quality monitoring
+- Extended regulated enterprise platforms to adopt GenAI safely, focusing on architecture, security, and delivery standards
 
 ### Machine Learning
 

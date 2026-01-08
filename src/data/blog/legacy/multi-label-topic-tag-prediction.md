@@ -13,5 +13,3 @@ canonicalURL: https://pcx.linkedinfo.co/post/text-tag-prediction/
 This is a preserved post from my legacy site. The original (full) article is here:
 
 - [Multi-label classification to predict topic tags of technical articles from LinkedInfo.co](https://pcx.linkedinfo.co/post/text-tag-prediction/)
-
-
