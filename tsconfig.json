@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "public/pagefind"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["./src/*"],
+      "astro/loaders": ["./node_modules/astro/dist/content/loaders/index"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}
