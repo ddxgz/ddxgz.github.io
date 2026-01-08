@@ -1,6 +1,6 @@
 # Cong's Notes
 
-Personal knowledge garden built with [Astro](https://astro.build/) and the AstroPaper theme. The goal of this repo is to publish essays, research notes, and project summaries without carrying over the upstream demo content.
+Personal knowledge garden built with [Astro](https://astro.build/) and [AstroPaper](https://github.com/satnaing/astro-paper). The goal of this repo is to publish essays, research notes, and project summaries.
 
 ## Local development
 
