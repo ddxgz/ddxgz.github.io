@@ -65,8 +65,7 @@ Currently building [Actorise](https://www.actorise.com).
 <p><strong>Links:</strong> <a href="https://lesion.linkedinfo.co">demo</a> · <a href="https://skinlesionapp-f642omuzga-uc.a.run.app">backup demo</a> · <a href="https://pcx.linkedinfo.co/project/skin-lesion-classifier/">legacy page</a></p>
 </details>
 
-## Recent Publications 
-
+## Recent Publications
 
 - 2019 — [A literature review of current technologies on health data integration for patient-centered health management](/publications/pcx-2019-b/)
 - 2019 — [Meaningful Integration of Data from Heterogeneous Health Services and Home Environment Based on Ontology](/publications/pcx-2019-a/)
