@@ -65,10 +65,10 @@ Currently building [Actorise](https://www.actorise.com).
 <p><strong>Links:</strong> <a href="https://lesion.linkedinfo.co">demo</a> · <a href="https://skinlesionapp-f642omuzga-uc.a.run.app">backup demo</a> · <a href="https://pcx.linkedinfo.co/project/skin-lesion-classifier/">legacy page</a></p>
 </details>
 
-## Publications (selected)
+## Recent Publications 
 
-- Google Scholar: [87g_0KgAAAAJ](https://scholar.google.com/citations?user=87g_0KgAAAAJ)
-- 2019 — [A literature review of current technologies on health data integration for patient-centered health management](https://pcx.linkedinfo.co/publication/pcx-2019-b/)
-- 2019 — [Meaningful Integration of Data from Heterogeneous Health Services and Home Environment Based on Ontology](https://pcx.linkedinfo.co/publication/pcx-2019-a/)
-- 2018 — [Fuzzy Matching of OpenAPI Described REST Services](https://pcx.linkedinfo.co/publication/pcx-2018-c/)
-- Full list (legacy): [pcx.linkedinfo.co/publication](https://pcx.linkedinfo.co/publication/)
+
+- 2019 — [A literature review of current technologies on health data integration for patient-centered health management](/publications/pcx-2019-b/)
+- 2019 — [Meaningful Integration of Data from Heterogeneous Health Services and Home Environment Based on Ontology](/publications/pcx-2019-a/)
+- 2018 — [An Ontological Approach to Integrate Health Resources from Different Categories of Services](/publications/pcx-2018-d/)
+- [All publications](/publications/)

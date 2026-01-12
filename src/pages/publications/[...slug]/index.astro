@@ -1,0 +1,55 @@
+---
+import { render, type CollectionEntry, getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/layouts/Main.astro";
+import { SITE } from "@/config";
+import { getPublicationPath } from "@/utils/getPublicationPath";
+
+export interface Props {
+  publication: CollectionEntry<"publications">;
+}
+
+export async function getStaticPaths() {
+  const pubs = await getCollection("publications");
+  return pubs.map(publication => ({
+    params: { slug: getPublicationPath(publication.id, publication.filePath, false) },
+    props: { publication },
+  }));
+}
+
+const { publication } = Astro.props;
+const { Content } = await render(publication);
+const { title, description, pubDatetime, authors, type, pdfUrl, doiUrl } =
+  publication.data;
+---
+
+<Layout
+  title={`${title} | ${SITE.title}`}
+  description={description ?? title}
+  pubDatetime={pubDatetime}
+>
+  <Header />
+  <Main pageTitle={title} pageDesc={type ?? "Publication"}>
+    <div class="mb-4 text-sm opacity-80">
+      <span>{pubDatetime.toLocaleDateString("en-US", { year: "numeric", month: "long" })}</span>
+      {authors.length > 0 && <span> · {authors.join(", ")}</span>}
+    </div>
+
+    <div class="app-prose mb-8 flex flex-wrap gap-3 text-sm">
+      {pdfUrl && (
+        <a href={pdfUrl} rel="noreferrer" target="_blank">PDF</a>
+      )}
+      {doiUrl && (
+        <a href={doiUrl} rel="noreferrer" target="_blank">DOI</a>
+      )}
+    </div>
+
+    <article class="app-prose max-w-app">
+      <Content />
+    </article>
+  </Main>
+  <Footer />
+</Layout>
+
