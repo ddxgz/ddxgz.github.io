@@ -26,3 +26,9 @@ Useful scripts:
 ## Deployment
 
 The site is designed for static hosting (GitHub Pages, Cloudflare Pages, etc.). Run `pnpm run build` and deploy the contents of `dist/` to your host of choice. Continuous deployment from the `main` branch keeps https://ddxgz.github.io up to date.
+
+## Format code before commit
+
+```bash
+pnpm run format:check --write
+```

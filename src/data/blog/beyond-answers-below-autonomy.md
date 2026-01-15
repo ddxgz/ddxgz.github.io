@@ -5,6 +5,8 @@ pubDatetime: 2025-12-14T00:00:00Z
 ogImage: "https://images.unsplash.com/photo-1504233138167-a91c038f5e64?auto=format&fit=crop&q=80"
 ---
 
+## Table of contents
+
 ## The Two Extremes
 
 AI is already changing the way how we work. The expectation was that it would offload human work. In reality, many teams just ended up with getting more work. Many people still feel that the only tasks they can reliably trust AI today are being the question answering bots, who help you search and synthesize, and doing writing and coding with you. These question answering bots still expect you to know what to ask, stitch everything together manually, and push work to the finish line. The promised business value that AI will bring seems still a long way to go.

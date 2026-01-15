@@ -1,0 +1,852 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "values": [
+      {
+        "tag": "fusion.js",
+        "count": 2
+      },
+      {
+        "tag": "load-balance",
+        "count": 2
+      },
+      {
+        "tag": "ethic",
+        "count": 2
+      },
+      {
+        "tag": "web-services",
+        "count": 2
+      },
+      {
+        "tag": "aws",
+        "count": 2
+      },
+      {
+        "tag": "filesystem",
+        "count": 2
+      },
+      {
+        "tag": "iot",
+        "count": 2
+      },
+      {
+        "tag": "emacs-lisp",
+        "count": 2
+      },
+      {
+        "tag": "github",
+        "count": 2
+      },
+      {
+        "tag": "crawler",
+        "count": 2
+      },
+      {
+        "tag": "event-driven",
+        "count": 2
+      },
+      {
+        "tag": "pytorch",
+        "count": 2
+      },
+      {
+        "tag": "pdf",
+        "count": 2
+      },
+      {
+        "tag": "lambda",
+        "count": 2
+      },
+      {
+        "tag": "spacemacs",
+        "count": 2
+      },
+      {
+        "tag": "pdb",
+        "count": 2
+      },
+      {
+        "tag": "namespaces",
+        "count": 2
+      },
+      {
+        "tag": "mvc",
+        "count": 2
+      },
+      {
+        "tag": "unicode",
+        "count": 2
+      },
+      {
+        "tag": "sdk",
+        "count": 2
+      },
+      {
+        "tag": "makefile",
+        "count": 2
+      },
+      {
+        "tag": "webkit",
+        "count": 2
+      },
+      {
+        "tag": "cdn",
+        "count": 2
+      },
+      {
+        "tag": "object-detection",
+        "count": 2
+      },
+      {
+        "tag": "documentation",
+        "count": 2
+      },
+      {
+        "tag": "project-management",
+        "count": 2
+      },
+      {
+        "tag": "cloud",
+        "count": 2
+      },
+      {
+        "tag": "classification",
+        "count": 2
+      },
+      {
+        "tag": "jvm",
+        "count": 2
+      },
+      {
+        "tag": "circuit-breaker",
+        "count": 2
+      },
+      {
+        "tag": "integration-test",
+        "count": 2
+      },
+      {
+        "tag": "amqp",
+        "count": 2
+      },
+      {
+        "tag": "anomaly-detection",
+        "count": 2
+      },
+      {
+        "tag": "dom",
+        "count": 2
+      },
+      {
+        "tag": "cloud-storage",
+        "count": 2
+      },
+      {
+        "tag": "ddd",
+        "count": 2
+      },
+      {
+        "tag": "vue-router",
+        "count": 2
+      },
+      {
+        "tag": "activemq",
+        "count": 2
+      },
+      {
+        "tag": "excel",
+        "count": 2
+      },
+      {
+        "tag": "linked-list",
+        "count": 2
+      },
+      {
+        "tag": "linear-programming",
+        "count": 2
+      },
+      {
+        "tag": "electron",
+        "count": 2
+      },
+      {
+        "tag": "kernel",
+        "count": 2
+      },
+      {
+        "tag": "lock-free",
+        "count": 2
+      },
+      {
+        "tag": "data-mining",
+        "count": 2
+      },
+      {
+        "tag": "virtual-machine",
+        "count": 2
+      },
+      {
+        "tag": "d3",
+        "count": 1
+      },
+      {
+        "tag": "neo4j",
+        "count": 1
+      },
+      {
+        "tag": "text-editor",
+        "count": 1
+      },
+      {
+        "tag": "unity",
+        "count": 1
+      },
+      {
+        "tag": "baas",
+        "count": 1
+      },
+      {
+        "tag": "information-theory",
+        "count": 1
+      },
+      {
+        "tag": "messaging",
+        "count": 1
+      },
+      {
+        "tag": "crdt",
+        "count": 1
+      },
+      {
+        "tag": "os",
+        "count": 1
+      },
+      {
+        "tag": "webgl",
+        "count": 1
+      },
+      {
+        "tag": "anti-pattern",
+        "count": 1
+      },
+      {
+        "tag": "hadoop",
+        "count": 1
+      },
+      {
+        "tag": "development",
+        "count": 1
+      },
+      {
+        "tag": "orm",
+        "count": 1
+      },
+      {
+        "tag": "voltdb",
+        "count": 1
+      },
+      {
+        "tag": "linear-model",
+        "count": 1
+      },
+      {
+        "tag": "consul",
+        "count": 1
+      },
+      {
+        "tag": "ansible",
+        "count": 1
+      },
+      {
+        "tag": "pathfinding",
+        "count": 1
+      },
+      {
+        "tag": "linked-data",
+        "count": 1
+      },
+      {
+        "tag": "ajax",
+        "count": 1
+      },
+      {
+        "tag": "rendering-techniques",
+        "count": 1
+      },
+      {
+        "tag": "random-forests",
+        "count": 1
+      },
+      {
+        "tag": "photography",
+        "count": 1
+      },
+      {
+        "tag": "dns",
+        "count": 1
+      },
+      {
+        "tag": "code-review",
+        "count": 1
+      },
+      {
+        "tag": "rsa",
+        "count": 1
+      },
+      {
+        "tag": "bloom-filter",
+        "count": 1
+      },
+      {
+        "tag": "deployment",
+        "count": 1
+      },
+      {
+        "tag": "forward+",
+        "count": 1
+      },
+      {
+        "tag": "token",
+        "count": 1
+      },
+      {
+        "tag": "gcc",
+        "count": 1
+      },
+      {
+        "tag": "oracle",
+        "count": 1
+      },
+      {
+        "tag": "cap",
+        "count": 1
+      },
+      {
+        "tag": "severless",
+        "count": 1
+      },
+      {
+        "tag": "wpf",
+        "count": 1
+      },
+      {
+        "tag": "graphics",
+        "count": 1
+      },
+      {
+        "tag": "cors",
+        "count": 1
+      },
+      {
+        "tag": "locale",
+        "count": 1
+      },
+      {
+        "tag": "ipv6",
+        "count": 1
+      },
+      {
+        "tag": "apache",
+        "count": 1
+      },
+      {
+        "tag": "iots",
+        "count": 1
+      },
+      {
+        "tag": "bytecode",
+        "count": 1
+      },
+      {
+        "tag": "cookie",
+        "count": 1
+      },
+      {
+        "tag": "bot",
+        "count": 1
+      },
+      {
+        "tag": "time-series-analysis",
+        "count": 1
+      },
+      {
+        "tag": "assembly",
+        "count": 1
+      },
+      {
+        "tag": "arm",
+        "count": 1
+      },
+      {
+        "tag": "multiprocessing",
+        "count": 1
+      },
+      {
+        "tag": "cms",
+        "count": 1
+      },
+      {
+        "tag": "cassandra",
+        "count": 1
+      },
+      {
+        "tag": "ggplot",
+        "count": 1
+      },
+      {
+        "tag": "mesos",
+        "count": 1
+      },
+      {
+        "tag": "automl",
+        "count": 1
+      },
+      {
+        "tag": "auditing",
+        "count": 1
+      },
+      {
+        "tag": "service-architecture",
+        "count": 1
+      },
+      {
+        "tag": "goroutine",
+        "count": 1
+      },
+      {
+        "tag": "text-generator",
+        "count": 1
+      },
+      {
+        "tag": "option",
+        "count": 1
+      },
+      {
+        "tag": "travis-ci",
+        "count": 1
+      },
+      {
+        "tag": "gateway",
+        "count": 1
+      },
+      {
+        "tag": "productivity",
+        "count": 1
+      },
+      {
+        "tag": "angularjs",
+        "count": 1
+      },
+      {
+        "tag": "pyspark",
+        "count": 1
+      },
+      {
+        "tag": "data-pipeline",
+        "count": 1
+      },
+      {
+        "tag": "raspberry-pi",
+        "count": 1
+      },
+      {
+        "tag": "service-mesh",
+        "count": 1
+      },
+      {
+        "tag": "memcached",
+        "count": 1
+      },
+      {
+        "tag": "quantum-communication",
+        "count": 1
+      },
+      {
+        "tag": "soa",
+        "count": 1
+      },
+      {
+        "tag": "ssh",
+        "count": 1
+      },
+      {
+        "tag": "open-data",
+        "count": 1
+      },
+      {
+        "tag": "command-line-interface",
+        "count": 1
+      },
+      {
+        "tag": "yaml",
+        "count": 1
+      },
+      {
+        "tag": "server",
+        "count": 1
+      },
+      {
+        "tag": "mac",
+        "count": 1
+      },
+      {
+        "tag": "monitoring",
+        "count": 1
+      },
+      {
+        "tag": "translation",
+        "count": 1
+      },
+      {
+        "tag": "posix",
+        "count": 1
+      },
+      {
+        "tag": "data-analytics",
+        "count": 1
+      },
+      {
+        "tag": "hdfs",
+        "count": 1
+      },
+      {
+        "tag": "recurrent-neural-networks",
+        "count": 1
+      },
+      {
+        "tag": "word-embedding",
+        "count": 1
+      },
+      {
+        "tag": "ludwig",
+        "count": 1
+      },
+      {
+        "tag": "image-recognition",
+        "count": 1
+      },
+      {
+        "tag": "maven",
+        "count": 1
+      },
+      {
+        "tag": "wordpress",
+        "count": 1
+      },
+      {
+        "tag": "elm",
+        "count": 1
+      },
+      {
+        "tag": "monad",
+        "count": 1
+      },
+      {
+        "tag": "plotly",
+        "count": 1
+      },
+      {
+        "tag": "math",
+        "count": 1
+      },
+      {
+        "tag": "protobuf",
+        "count": 1
+      },
+      {
+        "tag": "face-recognition",
+        "count": 1
+      },
+      {
+        "tag": "paxos",
+        "count": 1
+      },
+      {
+        "tag": "academia",
+        "count": 1
+      },
+      {
+        "tag": "speech-recognition",
+        "count": 1
+      },
+      {
+        "tag": "feature-engineering",
+        "count": 1
+      },
+      {
+        "tag": "babel",
+        "count": 1
+      },
+      {
+        "tag": "tachyon",
+        "count": 1
+      },
+      {
+        "tag": "postgresql",
+        "count": 1
+      },
+      {
+        "tag": "relational-database",
+        "count": 1
+      },
+      {
+        "tag": "data-workflow",
+        "count": 1
+      },
+      {
+        "tag": "monkey-patch",
+        "count": 1
+      },
+      {
+        "tag": "udp",
+        "count": 1
+      },
+      {
+        "tag": "ehealth",
+        "count": 1
+      },
+      {
+        "tag": "optimization",
+        "count": 1
+      },
+      {
+        "tag": "webrtc",
+        "count": 1
+      },
+      {
+        "tag": "proxy",
+        "count": 1
+      },
+      {
+        "tag": "cross-validation",
+        "count": 1
+      },
+      {
+        "tag": "hypothesis-test",
+        "count": 1
+      },
+      {
+        "tag": "ivy",
+        "count": 1
+      },
+      {
+        "tag": "markov-chains",
+        "count": 1
+      },
+      {
+        "tag": "text-recognition",
+        "count": 1
+      },
+      {
+        "tag": "latex",
+        "count": 1
+      },
+      {
+        "tag": "openstack",
+        "count": 1
+      },
+      {
+        "tag": "sqlite",
+        "count": 1
+      },
+      {
+        "tag": "computer-system",
+        "count": 1
+      },
+      {
+        "tag": "eslint",
+        "count": 1
+      },
+      {
+        "tag": "obect-detection",
+        "count": 1
+      },
+      {
+        "tag": "bokeh",
+        "count": 1
+      },
+      {
+        "tag": "data-cleaning",
+        "count": 1
+      },
+      {
+        "tag": "color-topics",
+        "count": 1
+      },
+      {
+        "tag": "firebase",
+        "count": 1
+      },
+      {
+        "tag": "doom-emacs",
+        "count": 1
+      },
+      {
+        "tag": "speech--recognition",
+        "count": 1
+      },
+      {
+        "tag": "decentralized-web",
+        "count": 1
+      },
+      {
+        "tag": "tkinter",
+        "count": 1
+      },
+      {
+        "tag": "ops",
+        "count": 1
+      },
+      {
+        "tag": "epoll",
+        "count": 1
+      },
+      {
+        "tag": "index",
+        "count": 1
+      },
+      {
+        "tag": "lua",
+        "count": 1
+      },
+      {
+        "tag": "dgraph",
+        "count": 1
+      },
+      {
+        "tag": "desktop",
+        "count": 1
+      },
+      {
+        "tag": "reliability",
+        "count": 1
+      },
+      {
+        "tag": "laravel",
+        "count": 1
+      },
+      {
+        "tag": "mypy",
+        "count": 1
+      },
+      {
+        "tag": "access-control",
+        "count": 1
+      },
+      {
+        "tag": "virtualization",
+        "count": 1
+      },
+      {
+        "tag": "kvm",
+        "count": 1
+      },
+      {
+        "tag": "qemu",
+        "count": 1
+      },
+      {
+        "tag": "csrf",
+        "count": 1
+      },
+      {
+        "tag": "quantum-computing",
+        "count": 1
+      },
+      {
+        "tag": "nodejs",
+        "count": 1
+      },
+      {
+        "tag": "random-forest",
+        "count": 1
+      },
+      {
+        "tag": "quantum-theory",
+        "count": 1
+      },
+      {
+        "tag": "socket",
+        "count": 1
+      },
+      {
+        "tag": "redux",
+        "count": 1
+      },
+      {
+        "tag": "ide",
+        "count": 1
+      },
+      {
+        "tag": "postgre",
+        "count": 1
+      },
+      {
+        "tag": "text-classifier",
+        "count": 1
+      },
+      {
+        "tag": "etl",
+        "count": 1
+      },
+      {
+        "tag": "cloud-native",
+        "count": 1
+      },
+      {
+        "tag": "agile",
+        "count": 1
+      },
+      {
+        "tag": "sparql",
+        "count": 1
+      }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "width": "container",
+  "height": 420,
+  "encoding": {
+    "x": {
+      "field": "tag",
+      "type": "ordinal",
+      "sort": "-y",
+      "axis": {
+        "labelAngle": -45,
+        "labelLimit": 90,
+        "labelOverlap": "greedy"
+      }
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative",
+      "title": "Number of infos"
+    },
+    "tooltip": [
+      {
+        "field": "tag",
+        "type": "nominal"
+      },
+      {
+        "field": "count",
+        "type": "quantitative"
+      }
+    ]
+  },
+  "config": {
+    "axis": {
+      "labelFontSize": 11
+    },
+    "view": {
+      "stroke": null
+    },
+    "autosize": {
+      "type": "fit",
+      "contains": "padding"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "isFraud": "No",
+    "transactions": 569877
+  },
+  {
+    "isFraud": "Yes",
+    "transactions": 20663
+  }
+]

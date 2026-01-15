@@ -1,0 +1,216 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "values": [
+      {
+        "tag": "python",
+        "count": 425
+      },
+      {
+        "tag": "golang",
+        "count": 272
+      },
+      {
+        "tag": "web",
+        "count": 181
+      },
+      {
+        "tag": "javascript",
+        "count": 155
+      },
+      {
+        "tag": "machine-learning",
+        "count": 129
+      },
+      {
+        "tag": "microservices",
+        "count": 89
+      },
+      {
+        "tag": "deep-learning",
+        "count": 80
+      },
+      {
+        "tag": "neural-networks",
+        "count": 77
+      },
+      {
+        "tag": "api",
+        "count": 67
+      },
+      {
+        "tag": "data-science",
+        "count": 60
+      },
+      {
+        "tag": "java",
+        "count": 53
+      },
+      {
+        "tag": "node.js",
+        "count": 50
+      },
+      {
+        "tag": "testing",
+        "count": 48
+      },
+      {
+        "tag": "concurrency",
+        "count": 47
+      },
+      {
+        "tag": "vue.js",
+        "count": 42
+      },
+      {
+        "tag": "system-architecture",
+        "count": 39
+      },
+      {
+        "tag": "react",
+        "count": 39
+      },
+      {
+        "tag": "db",
+        "count": 39
+      },
+      {
+        "tag": "compiler",
+        "count": 35
+      },
+      {
+        "tag": "docker",
+        "count": 35
+      },
+      {
+        "tag": "http",
+        "count": 33
+      },
+      {
+        "tag": "git",
+        "count": 32
+      },
+      {
+        "tag": "kubernetes",
+        "count": 32
+      },
+      {
+        "tag": "rust",
+        "count": 32
+      },
+      {
+        "tag": "restful",
+        "count": 31
+      },
+      {
+        "tag": "data-visualization",
+        "count": 31
+      },
+      {
+        "tag": "cpp",
+        "count": 31
+      },
+      {
+        "tag": "django",
+        "count": 31
+      },
+      {
+        "tag": "nlp",
+        "count": 30
+      },
+      {
+        "tag": "oop",
+        "count": 29
+      },
+      {
+        "tag": "kafka",
+        "count": 28
+      },
+      {
+        "tag": "graphql",
+        "count": 27
+      },
+      {
+        "tag": "angular",
+        "count": 27
+      },
+      {
+        "tag": "programming",
+        "count": 26
+      },
+      {
+        "tag": "linux",
+        "count": 26
+      },
+      {
+        "tag": "css",
+        "count": 25
+      },
+      {
+        "tag": "frontend",
+        "count": 25
+      },
+      {
+        "tag": "security",
+        "count": 25
+      },
+      {
+        "tag": "functional-programming",
+        "count": 22
+      },
+      {
+        "tag": "interpreter",
+        "count": 22
+      },
+      {
+        "tag": "distributed-system",
+        "count": 21
+      }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "width": "container",
+  "height": 420,
+  "encoding": {
+    "x": {
+      "field": "tag",
+      "type": "ordinal",
+      "sort": "-y",
+      "axis": {
+        "labelAngle": -45,
+        "labelLimit": 90,
+        "labelOverlap": "greedy"
+      }
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative",
+      "title": "Number of infos"
+    },
+    "tooltip": [
+      {
+        "field": "tag",
+        "type": "nominal"
+      },
+      {
+        "field": "count",
+        "type": "quantitative"
+      }
+    ]
+  },
+  "config": {
+    "axis": {
+      "labelFontSize": 11
+    },
+    "view": {
+      "stroke": null
+    },
+    "autosize": {
+      "type": "fit",
+      "contains": "padding"
+    }
+  }
+}

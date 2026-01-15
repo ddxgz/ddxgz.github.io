@@ -47,6 +47,6 @@
     "simple-git-hooks": "^2.13.1"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format:check && pnpm lint"
+    "pre-commit": "pnpm format && pnpm lint"
   }
 }

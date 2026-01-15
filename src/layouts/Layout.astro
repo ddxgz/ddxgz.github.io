@@ -116,6 +116,33 @@ const structuredData = {
 
     <meta name="theme-color" content="" />
 
+    <script is:inline>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+        options: {
+          skipHtmlTags: [
+            "script",
+            "noscript",
+            "style",
+            "textarea",
+            "pre",
+            "code",
+          ],
+        },
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+    ></script>
+
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
       // include google-site-verification tag in the heading
@@ -131,6 +158,21 @@ const structuredData = {
     <ClientRouter />
 
     <script is:inline src="/toggle-theme.js"></script>
+    <script is:inline>
+      window.addEventListener("message", event => {
+        const data = event.data;
+        if (!data || data.type !== "vega-embed:resize") return;
+        const height = Number(data.height);
+        if (!Number.isFinite(height) || height <= 0) return;
+        const iframes = document.querySelectorAll("iframe");
+        for (const iframe of iframes) {
+          if (iframe.contentWindow === event.source) {
+            iframe.style.height = `${Math.ceil(height)}px`;
+            break;
+          }
+        }
+      });
+    </script>
   </head>
   <body>
     <slot />
