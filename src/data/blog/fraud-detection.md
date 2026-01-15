@@ -916,7 +916,7 @@ id_train.head()
 </table>
 </div>
 
-````python
+```python
 is_fraud = tran_train[['isFraud', 'TransactionID']].groupby('isFraud').count()
 
 is_fraud['ratio'] = is_fraud['TransactionID'] / is_fraud['TransactionID'].sum()
@@ -925,7 +925,7 @@ fig_Y = px.bar(is_fraud, x=is_fraud.index, y='TransactionID',
                labels={'TransactionID': 'Number of transactions',
                        'x': 'is fraud'})
 fig_Y.update_traces(texttemplate='%{text:.6p}')
-```python
+```
 
 <figure>
   <iframe
@@ -964,7 +964,7 @@ def missing_ratio_col(df):
 
 missing_ratio_col(tran_train)
 missing_ratio_col(id_train)
-```python
+```
 
 <div>
 <table border="1" class="dataframe">
@@ -1485,7 +1485,7 @@ class AggregateEncoder(TransformerMixin, BaseEstimator):
                     if self.fill_na:
                         df[col_new].fillna(-1, inplace=True)
         return df
-```python
+```
 
 ```python
 from sklearn.pipeline import Pipeline
@@ -1522,7 +1522,7 @@ pipe = Pipeline(steps=[
     # ('onehot_enc', DummyEncoder()),
     ('label_enc', MyLabelEncoder()),
 ])
-```python
+```
 
 ### Split dataset
 
@@ -1562,7 +1562,7 @@ def data_split_smoteenn_v1(X: pd.DataFrame, y: pd.Series):
     X_train, y_train = ros.fit_resample(X_train, y_train)
 
     return X_train, X_val, y_train, y_val
-```python
+```
 
 # Experiments
 
@@ -1652,7 +1652,7 @@ class Experiment:
         with open(f'{EXP_DIR}/exp_{save_time}_{self.last_roc_auc:.4f}.json', 'w') as f:
             json.dump(result, f, indent=4)
 
-```python
+```
 
 ```python
 import gc
@@ -1662,11 +1662,11 @@ del tran_train, id_train
 gc.collect()
 
 df_train = load_df()
-```python
+```
 
 ```python
 df_train = load_df()
-```python
+```
 
     Mem. usage decreased to 650.48 Mb (66.8% reduction)
 
@@ -1705,7 +1705,7 @@ def exp1():
     exp.run(df_train=df_train)
 
 exp1()
-```python
+```
 
     /usr/local/lib/python3.6/dist-packages/sklearn/linear_model/_logistic.py:940: ConvergenceWarning:
 
@@ -1813,7 +1813,7 @@ def exp2():
 
 
 exp2()
-```python
+```
 
     /usr/local/lib/python3.6/dist-packages/lightgbm/engine.py:118: UserWarning:
 
@@ -1851,4 +1851,3 @@ exp2()
 So we got local validation ROC AUC of about 0.9196, this is a looks OK score.
 
 This model's prediction on the test dataset got 0.9398 on publica leader board, and 0.9058 on private leader board. These scores have a somehow big gap to the top scores, but still good enough as there're potentially many ways for improvement. For example, more different ways of transformations and engineering could be performed on the features, try model implementation like CatBoost and XGB, and search for better hyper-parameters. But it assumes you have plenty of computation resource and time.
-````
