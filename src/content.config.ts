@@ -21,6 +21,9 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
+      links: z
+        .array(z.object({ name: z.string(), url: z.string().url() }))
+        .optional(),
     }),
 });
 
