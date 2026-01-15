@@ -85,7 +85,7 @@ fig_Y.update_traces(texttemplate='%{text}')
     src="/vega/embed.html?spec=/vega/text-tag-bert-0-spec.json"
     title="Tag frequency chart"
     loading="lazy"
-    style="width:100%;border:0;min-height:540px;"
+    style="width:100%;border:0;height:460px;"
   ></iframe>
 </figure>
 
@@ -104,7 +104,7 @@ fig_Y.update_traces(texttemplate='%{text}')
     src="/vega/embed.html?spec=/vega/text-tag-bert-1-spec.json"
     title="Rare tag frequency chart"
     loading="lazy"
-    style="width:100%;border:0;min-height:540px;"
+    style="width:100%;border:0;height:460px;"
   ></iframe>
 </figure>
 
@@ -435,7 +435,7 @@ fig_Y.update_traces(texttemplate='%{text}')
     src="/vega/embed.html?spec=/vega/text-tag-bert-2-spec.json"
     title="Top tags zoomed chart"
     loading="lazy"
-    style="width:100%;border:0;min-height:540px;"
+    style="width:100%;border:0;height:460px;"
   ></iframe>
 </figure>
 

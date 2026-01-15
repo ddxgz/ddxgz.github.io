@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vega-Lite Embed</title>
     <style>
-      :root {
-        color-scheme: light dark;
+      html,
+      body {
+        background: transparent;
       }
       body {
         margin: 0;
@@ -17,10 +18,11 @@
           Segoe UI,
           sans-serif;
         background: transparent;
+        overflow: hidden;
       }
       #vis {
         width: 100%;
-        min-height: 320px;
+        min-height: 0;
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/vega@latest"></script>
@@ -38,15 +40,42 @@
           document.getElementById("vis").innerText = "Missing spec parameter.";
           return;
         }
+        const postHeight = () => {
+          const root = document.documentElement;
+          const vis = document.getElementById("vis");
+          const height = Math.max(
+            vis?.offsetHeight || 0,
+            root.scrollHeight,
+            root.offsetHeight
+          );
+          if (window.parent && window.parent !== window && height) {
+            window.parent.postMessage(
+              { type: "vega-embed:resize", height },
+              "*"
+            );
+          }
+        };
+
         vegaEmbed("#vis", specUrl, {
           actions: false,
           renderer,
           padding: 4,
-        }).catch(err => {
-          console.error(err);
-          const el = document.getElementById("vis");
-          el.innerText = "Failed to load chart.";
-        });
+        })
+          .then(() => {
+            requestAnimationFrame(postHeight);
+            setTimeout(postHeight, 50);
+            const vis = document.getElementById("vis");
+            if (window.ResizeObserver && vis) {
+              const observer = new ResizeObserver(() => postHeight());
+              observer.observe(vis);
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            const el = document.getElementById("vis");
+            el.innerText = "Failed to load chart.";
+            postHeight();
+          });
       })();
     </script>
   </body>

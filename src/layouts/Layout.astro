@@ -158,6 +158,21 @@ const structuredData = {
     <ClientRouter />
 
     <script is:inline src="/toggle-theme.js"></script>
+    <script is:inline>
+      window.addEventListener("message", event => {
+        const data = event.data;
+        if (!data || data.type !== "vega-embed:resize") return;
+        const height = Number(data.height);
+        if (!Number.isFinite(height) || height <= 0) return;
+        const iframes = document.querySelectorAll("iframe");
+        for (const iframe of iframes) {
+          if (iframe.contentWindow === event.source) {
+            iframe.style.height = `${Math.ceil(height)}px`;
+            break;
+          }
+        }
+      });
+    </script>
   </head>
   <body>
     <slot />

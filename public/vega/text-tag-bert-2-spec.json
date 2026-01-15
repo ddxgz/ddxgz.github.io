@@ -180,7 +180,9 @@
       "type": "ordinal",
       "sort": "-y",
       "axis": {
-        "labelAngle": -45
+        "labelAngle": -45,
+        "labelLimit": 90,
+        "labelOverlap": "greedy"
       }
     },
     "y": {
