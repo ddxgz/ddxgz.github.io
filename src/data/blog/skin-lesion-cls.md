@@ -436,7 +436,6 @@ $$
 m c c=\frac{t p \cdot t n-f p \cdot f n}{\sqrt{(t p+f p) \cdot(t p+f n) \cdot(t n+f p) \cdot(t n+f n)}}
 $$
 
-
 # Preprocess dataset
 
 ## Sampling

@@ -28,7 +28,7 @@ So let's start to explore the data with the data description.
 
 {{% toc %}}
 
-````python
+```python
 import os
 # from typing import List, Union
 # from pysnooper import snoop
@@ -43,7 +43,7 @@ if os.getcwd().split('/')[-1] != loc:
 
 df_train = pd.read_csv(f'input/train.csv')
 df_test = pd.read_csv(f'input/test.csv')
-```python
+```
 
 # Data exploration
 
@@ -52,7 +52,7 @@ Let's firstly have a look at the data we have.
 ```python
 print(df_train.shape)
 df_train.head()
-````
+```
 
     (1460, 81)
 
@@ -210,10 +210,10 @@ df_train.head()
 <p>5 rows × 81 columns</p>
 </div>
 
-````python
+```python
 print(df_test.shape)
 df_test.head()
-```python
+```
 
     (1459, 80)
 
@@ -380,8 +380,6 @@ variables + 1 col of 'Id'.
 Now let's check if there is any missing value in the data.
 
 ```python
-
-
 def cols_missing_value(df):
     df_null_sum = df.isnull().sum()
     df_na = (df.isnull().sum() / len(df)) * 100
@@ -392,7 +390,7 @@ def cols_missing_value(df):
 
 
 cols_missing_value(df_train)
-````
+```
 
 <div>
 <table border="1" class="dataframe">
@@ -503,9 +501,9 @@ cols_missing_value(df_train)
 </table>
 </div>
 
-````python
-cols_missing_value(pd.concat((df_train[df_test.columns], df_test)))
 ```python
+cols_missing_value(pd.concat((df_train[df_test.columns], df_test)))
+```
 
 <div>
 <table border="1" class="dataframe">
@@ -700,7 +698,7 @@ this col.
 
 ```python
 df_train['SalePrice'].describe()
-````
+```
 
     count      1460.000000
     mean     180921.195890
@@ -712,9 +710,9 @@ df_train['SalePrice'].describe()
     max      755000.000000
     Name: SalePrice, dtype: float64
 
-````python
-df_train['SalePrice'].hist(bins=30)
 ```python
+df_train['SalePrice'].hist(bins=30)
+```
 
     <matplotlib.axes._subplots.AxesSubplot at 0x11414e4a8>
 
@@ -745,7 +743,7 @@ skewness = skewness[abs(skewness['Skewness']) > 0.75]
 print(f'{skewness.shape[0]} skewed numerical columns.')
 
 df_all[skewness.index].hist(figsize=(14, 12))
-````
+```
 
     /Users/pcx/.pyenv/versions/ml/lib/python3.7/site-packages/ipykernel_launcher.py:5: FutureWarning: Sorting because non-concatenation axis is not aligned. A future version
     of pandas will change to not sort by default.
@@ -790,14 +788,14 @@ are and how should we deal with them.
 We're now concating the training set and testing set since we need to handle
 the missing values in both data sets. We will split them when we need.
 
-````python
+```python
 # keep Id col for later unpack training and testing df
 ids_train = df_train['Id']
 ids_test = df_test['Id']
 Y_train = df_train['SalePrice'].values
 df_all = pd.concat((df_train, df_test)).reset_index(
     drop=True).drop(['SalePrice'], axis='columns')
-```python
+```
 
     /Users/pcx/.pyenv/versions/ml/lib/python3.7/site-packages/ipykernel_launcher.py:6: FutureWarning: Sorting because non-concatenation axis is not aligned. A future version
     of pandas will change to not sort by default.
@@ -810,13 +808,13 @@ df_all = pd.concat((df_train, df_test)).reset_index(
 
 ```python
 df_all['PoolQC'] = df_all['PoolQC'].fillna("No Pool")
-````
+```
 
 The same applies to 'MiscFeature', 'Alley', 'Fence', 'FireplaceQu',
 'GarageType', 'GarageFinish', 'GarageQual', 'GarageCond', 'BsmtQual',
 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2', 'MasVnrType'
 
-````python
+```python
 df_all['MiscFeature'] = df_all['MiscFeature'].fillna("None")
 df_all['Alley'] = df_all['Alley'].fillna("No Alley access")
 df_all['Fence'] = df_all['Fence'].fillna("No Fence")
@@ -830,7 +828,7 @@ df_all['BsmtQual'] = df_all['BsmtQual'].fillna("No Basement")
 df_all['BsmtExposure'] = df_all['BsmtExposure'].fillna("No Basement")
 df_all['BsmtFinType1'] = df_all['BsmtFinType1'].fillna("No Basement")
 df_all['BsmtFinType2'] = df_all['BsmtFinType2'].fillna("No Basement")
-```python
+```
 
 Now let's check 'GarageYrBlt', 'GarageArea', 'GarageCars'.
 Since only 1 record of 'GarageCars' is missing, and it's 'GarageType' is
@@ -842,19 +840,19 @@ df_all[df_all['GarageCars'].isnull()]
 df_all[df_all['GarageCars'].isnull()]['GarageType']
 df_all['GarageCars'] = df_all['GarageCars'].fillna(
     int(df_all[df_all['GarageType'] == 'Detchd']['GarageCars'].mode()))
-````
+```
 
 It's the same record for the missing 'GarageArea' value, as we filled its
 'GarageCars' to the mode value, we will fill the area as the mean value of
 'GarageArea' where the 'GarageCars' == mode value of 'Detchd'.
 
-````python
+```python
 df_all[df_all['GarageArea'].isnull()]
 df_all['GarageArea'] = df_all['GarageArea'].fillna(
     df_all[df_all['GarageType'] == 'Detchd']['GarageArea'].mean())
 
 # df_all[df_all['GarageYrBlt'].isnull()]['GarageType']
-```python
+```
 
 For the records that have no garage, we set the null value of 'GarageYrBlt'
 to 0, but for the records with type 'Detchd', we set the null value to the median
@@ -866,13 +864,13 @@ df_all['GarageYrBlt'] = df_all['GarageYrBlt'][
     df_all['GarageType'] == 'Detchd'].fillna(year_median)
 
 df_all['GarageYrBlt'] = df_all['GarageYrBlt'].fillna(0)
-````
+```
 
 Since there are quite many missing value for 'LotFrontage' (16.65%), we would drop this col.
 
-````python
-df_all = df_all.drop('LotFrontage', axis='columns')
 ```python
+df_all = df_all.drop('LotFrontage', axis='columns')
+```
 
 Filling with 0 for those likely to be 0.
 
@@ -882,14 +880,14 @@ bsmt_zero_missing = ['BsmtFinSF1', 'BsmtFinSF2',
 
 for col in bsmt_zero_missing:
     df_all[col] = df_all[col].fillna(0)
-````
+```
 
 'MasVnrArea' and 'MasVnrType'
 
-````python
+```python
 df_all[df_all['MasVnrType'].isnull()]['MasVnrArea']
 df_all['MasVnrType'].astype('category').value_counts()
-```python
+```
 
     None       1742
     BrkFace     879
@@ -907,14 +905,14 @@ df_all['MasVnrType'] = df_all['MasVnrType'][
     df_all['MasVnrArea'].notna()].fillna('BrkFace')
 df_all['MasVnrType'] = df_all['MasVnrType'].fillna('None')
 df_all['MasVnrArea'] = df_all['MasVnrArea'].fillna(0)
-````
+```
 
 Set the NaN to the mostly occurred value 'RL'.
 
-````python
+```python
 df_all['MSZoning'].astype('category').value_counts()
 df_all['MSZoning'] = df_all['MSZoning'].fillna('RL')
-```python
+```
 
 ```python
 # Set the NaN to the mostly occurred value 'AllPub'.
@@ -923,11 +921,11 @@ df_all['Utilities'] = df_all['Utilities'].fillna('AllPub')
 
 # keep or not?
 df_all = df_all.drop(['Utilities'], axis='columns')
-````
+```
 
 Set NaN to mostly occurred value for the rest cols.
 
-````python
+```python
 cols_nan_mode = ['Functional', 'Electrical', 'KitchenQual',
                  'Exterior1st', 'Exterior2nd', 'SaleType', 'MSSubClass']
 
@@ -935,7 +933,7 @@ for col in cols_nan_mode:
     df_all[col] = df_all[col].fillna(df_all[col].mode()[0])
 
 cols_missing_value(df_all)
-```python
+```
 
 <div>
 <table border="1" class="dataframe">
@@ -966,14 +964,14 @@ for col in cols_num_cat:
 # Adding total sqfootage feature
 df_all['TotalSF'] = df_all['TotalBsmtSF'] + \
     df_all['1stFlrSF'] + df_all['2ndFlrSF']
-````
+```
 
 ## Check and handle outliers
 
 After handling the missing values, now we have a look at if there are outliers
 in the training set with the target variable by scatter plots.
 
-````python
+```python
 import matplotlib.pyplot as plt
 
 df_train = df_all[:len(ids_train)]
@@ -987,7 +985,7 @@ df_train = pd.concat([df_train, pd.DataFrame(
 fig, axes = plt.subplots(6, 6, figsize=(30, 30))
 for i, col in enumerate(cols):
     df_train.plot.scatter(x=col, y='SalePrice', ax=axes[i // 6, i % 6])
-```python
+```
 
 ![svg](/posts/houseprice/output_44_0.svg)
 
@@ -1000,16 +998,16 @@ other cols such 'TotalBsmtSF' and 'TotalSF' are disappeared as well.
 ```python
 df_train = df_train.drop(df_train[(df_train['GrLivArea'] > 4000) &
                                   (df_train['SalePrice'] < 250000)].index)
-````
+```
 
-````python
+```python
 # Packing back data sets after removing outliers in training set.
 ids_train = df_train['Id']
 ids_test = df_test['Id']
 Y_train = df_train['SalePrice'].values
 df_all = pd.concat((df_train, df_test)).reset_index(
     drop=True).drop(['SalePrice'], axis='columns')
-```python
+```
 
 ## Transform skewed variables
 
@@ -1035,11 +1033,11 @@ import numpy as np
 skewed_features = skewness.index
 df_all[skewed_features] = quantile_transform(
     df_all[skewed_features], output_distribution='normal', copy=True)
-````
+```
 
     20 skewed numerical columns.
 
-````python
+```python
 # Check again for the skewnesses of the numerical cols
 skewed_cols = df_all[numeric_cols].apply(
     lambda col: skew(col)).sort_values(ascending=False)
@@ -1048,7 +1046,7 @@ skewness = pd.DataFrame({'Skewness': skewed_cols})
 
 skewness = skewness[abs(skewness['Skewness']) > 0.75]
 print(f'{skewness.shape[0]} skewed numerical columns.')
-```python
+```
 
     11 skewed numerical columns.
 
@@ -1062,7 +1060,7 @@ print(df_all.shape)
 # columns with object or category dtype will be converted.
 df_all = pd.get_dummies(df_all)
 print(df_all.shape)
-````
+```
 
     (2917, 79)
     (2917, 330)
@@ -1077,14 +1075,14 @@ Root-Mean-Squared-Error (RMSE) as the evaluation metric for the competition, the
 
 $$\operatorname{RMSE}(y, \hat{y})=\sqrt{\frac{1}{n\_{\text {samples }}} \sum\_{i=0}^{n\_{\text {symples }}-1}\left(y\_{i}-\hat{y}\_{i}\right)^{2}}$$.
 
-````python
+```python
 # Unpack training and testing data sets
 df_train = df_all[:len(ids_train)].drop(['Id'], axis='columns')
 df_test = df_all[len(ids_train):].drop(['Id'], axis='columns')
 
 X_train = df_train.values
 X_test = df_test
-```python
+```
 
 ```python
 import numpy as np
@@ -1133,7 +1131,7 @@ for m in models:
           # +/-std*2 for 95% confidence interval
           f'Accuracy: {scores.mean(): 0.4f} (+/-{scores.std() * 2: 0.4f})\n'
           f'{"-"*20}')
-````
+```
 
     Lasso
     Scores: [0.22425222 0.23934427 0.23998284 0.24165163 0.23227816]
@@ -1150,7 +1148,7 @@ The base models give somehow good results. The CV RMSE score of the /Ridge/
 model is around the top-1000 in the competition's leaderboard. Now let's try
 to find the best parameters for these and other models with `GridSearchCV`.
 
-````python
+```python
 from sklearn.svm import SVR
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import RobustScaler
@@ -1247,7 +1245,7 @@ df_gs = pd.DataFrame(gs_rec, columns=['name', 'score', 'params',
                                       'cv_test_score', 'cv_test_params']
                      ).sort_values(by=['score', 'cv_test_score'])
 df_gs
-```python
+```
 
     rob_lasso---------------
     {'model__alpha': 0.0005}
@@ -1359,4 +1357,4 @@ def submit(ids, pred, suffix):
 
 
 submit(ids_test, pred, 'elastic_net')
-````
+```
