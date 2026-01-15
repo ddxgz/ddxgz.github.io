@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vega-Lite Embed</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          sans-serif;
+        background: transparent;
+      }
+      #vis {
+        width: 100%;
+        min-height: 320px;
+      }
+    </style>
+    <script src="/vega/lib/vega.min.js"></script>
+    <script src="/vega/lib/vega-lite.min.js"></script>
+    <script src="/vega/lib/vega-embed.min.js"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+    <script>
+      (function () {
+        const params = new URLSearchParams(window.location.search);
+        const specUrl = params.get("spec");
+        const renderer = params.get("renderer") || "canvas";
+        if (!specUrl) {
+          document.getElementById("vis").innerText = "Missing spec parameter.";
+          return;
+        }
+        vegaEmbed("#vis", specUrl, {
+          actions: false,
+          renderer,
+          padding: 4,
+        }).catch(err => {
+          console.error(err);
+          const el = document.getElementById("vis");
+          el.innerText = "Failed to load chart.";
+        });
+      })();
+    </script>
+  </body>
+</html>

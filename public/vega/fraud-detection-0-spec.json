@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "values": [
+      {
+        "isFraud": "No",
+        "transactions": 569877
+      },
+      {
+        "isFraud": "Yes",
+        "transactions": 20663
+      }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "width": 360,
+  "height": 320,
+  "encoding": {
+    "x": {
+      "field": "isFraud",
+      "type": "nominal",
+      "sort": "-y",
+      "axis": {
+        "labelAngle": -45
+      }
+    },
+    "y": {
+      "field": "transactions",
+      "type": "quantitative",
+      "title": "Number of transactions"
+    },
+    "tooltip": [
+      {
+        "field": "isFraud",
+        "type": "nominal"
+      },
+      {
+        "field": "transactions",
+        "type": "quantitative"
+      }
+    ]
+  },
+  "config": {
+    "axis": {
+      "labelFontSize": 11
+    },
+    "view": {
+      "stroke": null
+    },
+    "autosize": {
+      "type": "fit",
+      "contains": "padding"
+    }
+  }
+}

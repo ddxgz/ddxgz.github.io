@@ -52,12 +52,12 @@ A more detailed explanation of the data can be found in the reply of [this discu
 
 Now let's have a close look at the data.
 
-```
+```python
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
 ```
 
-```
+```python
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -944,7 +944,7 @@ id_train.head()
 </table>
 </div>
 
-```
+````python
 is_fraud = tran_train[['isFraud', 'TransactionID']].groupby('isFraud').count()
 
 is_fraud['ratio'] = is_fraud['TransactionID'] / is_fraud['TransactionID'].sum()
@@ -953,58 +953,16 @@ fig_Y = px.bar(is_fraud, x=is_fraud.index, y='TransactionID',
                labels={'TransactionID': 'Number of transactions',
                        'x': 'is fraud'})
 fig_Y.update_traces(texttemplate='%{text:.6p}')
-```
+```python
 
-<html>
-<head><meta charset="utf-8" /></head>
-<body>
-    <div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>
-                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    
-            <div id="ac80ada0-952e-4492-9d69-bdab360ef9d6" class="plotly-graph-div" style="height:525px; width:100%;"></div>
-            <script type="text/javascript">
-                
-                    window.PLOTLYENV=window.PLOTLYENV || {};
-                    
-                if (document.getElementById("ac80ada0-952e-4492-9d69-bdab360ef9d6")) {
-                    Plotly.newPlot(
-                        'ac80ada0-952e-4492-9d69-bdab360ef9d6',
-                        [{"alignmentgroup": "True", "hoverlabel": {"namelength": 0}, "hovertemplate": "is fraud=%{x}<br>Number of transactions=%{y}<br>ratio=%{text}", "legendgroup": "", "marker": {"color": "#636efa"}, "name": "", "offsetgroup": "", "orientation": "v", "showlegend": false, "text": [0.9650099908558268, 0.03499000914417313], "textposition": "auto", "texttemplate": "%{text:.6p}", "type": "bar", "x": [0, 1], "xaxis": "x", "y": [569877, 20663], "yaxis": "y"}],
-                        {"barmode": "relative", "legend": {"tracegroupgap": 0}, "margin": {"t": 60}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "xaxis": {"anchor": "y", "domain": [0.0, 1.0], "title": {"text": "is fraud"}}, "yaxis": {"anchor": "x", "domain": [0.0, 1.0], "title": {"text": "Number of transactions"}}},
-                        {"responsive": true}
-                    ).then(function(){
-                            
-var gd = document.getElementById('ac80ada0-952e-4492-9d69-bdab360ef9d6');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })
-                };
-
-            </script>
-        </div>
-
-</body>
-</html>
+<figure>
+  <iframe
+    src="/vega/embed.html?spec=/vega/fraud-detection-0-spec.json"
+    title="Fraud vs non-fraud distribution"
+    loading="lazy"
+    style="width:100%;border:0;min-height:360px;"
+  ></iframe>
+</figure>
 
 ## Very imbalanced target varible
 
@@ -1018,7 +976,7 @@ Now let's have a look at if there's any missing value in the dataset. We can see
 
 It's hard to tell how we should handle with them before we look into each variable. Sometimes a missing value stands for something. It also depends on what kind of model we are going to use. We can leave them as missing value when using a tree model.
 
-```
+```python
 def missing_ratio_col(df):
     df_na = (df.isna().sum() / len(df)) * 100
     if isinstance(df, pd.DataFrame):
@@ -1034,7 +992,7 @@ def missing_ratio_col(df):
 
 missing_ratio_col(tran_train)
 missing_ratio_col(id_train)
-```
+```python
 
 <div>
 <style scoped>
@@ -1299,7 +1257,7 @@ There're very good references of EDA and feature engineering on the dataset, so 
 
 Based on the references and my own analysis, here we have a pipeline of the transformations to perform on the dataset. It can be adjusted for experimenting. Explanation of the transformations see in code comments.
 
-```
+```python
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -1583,9 +1541,9 @@ class AggregateEncoder(TransformerMixin, BaseEstimator):
                     if self.fill_na:
                         df[col_new].fillna(-1, inplace=True)
         return df
-```
+```python
 
-```
+```python
 from sklearn.pipeline import Pipeline
 
 pipe = Pipeline(steps=[
@@ -1620,7 +1578,7 @@ pipe = Pipeline(steps=[
     # ('onehot_enc', DummyEncoder()),
     ('label_enc', MyLabelEncoder()),
 ])
-```
+```python
 
 ### Split dataset
 
@@ -1628,7 +1586,7 @@ And as we want to predict future payment fraud based on the past data, so we sho
 
 As this is a imbalanced dataset with 1 class of the target variable have only about 3.5%, so we may want to try sampling methods like over-sampling or SMOTE sampling on the training dataset.
 
-```
+```python
 RAND_STATE = 20200119
 
 def data_split_v1(X: pd.DataFrame, y: pd.Series):
@@ -1660,7 +1618,7 @@ def data_split_smoteenn_v1(X: pd.DataFrame, y: pd.Series):
     X_train, y_train = ros.fit_resample(X_train, y_train)
 
     return X_train, X_val, y_train, y_val
-```
+```python
 
 # Experiments
 
@@ -1668,7 +1626,7 @@ Now let's start play with experimenting with simple models like Logistic Regress
 
 Here below is a scaffold for performing experiments.
 
-```
+```python
 import os
 from datetime import datetime
 import json
@@ -1750,9 +1708,9 @@ class Experiment:
         with open(f'{EXP_DIR}/exp_{save_time}_{self.last_roc_auc:.4f}.json', 'w') as f:
             json.dump(result, f, indent=4)
 
-```
+```python
 
-```
+```python
 import gc
 
 
@@ -1760,17 +1718,17 @@ del tran_train, id_train
 gc.collect()
 
 df_train = load_df()
-```
+```python
 
-```
+```python
 df_train = load_df()
-```
+```python
 
     Mem. usage decreased to 650.48 Mb (66.8% reduction)
 
 ## Logistic Regression as baseline
 
-```
+```python
 def exp1():
     from sklearn.linear_model import LogisticRegression
 
@@ -1803,7 +1761,7 @@ def exp1():
     exp.run(df_train=df_train)
 
 exp1()
-```
+```python
 
     /usr/local/lib/python3.6/dist-packages/sklearn/linear_model/_logistic.py:940: ConvergenceWarning:
 
@@ -1835,7 +1793,7 @@ exp1()
 
 Now let's try a Gradient Boosting tree model using the LightGBM implementation, and tune a little on the hyper-parameters to make it a more complex model.
 
-```
+```python
 import lightgbm as lgb
 
 
@@ -1911,7 +1869,7 @@ def exp2():
 
 
 exp2()
-```
+```python
 
     /usr/local/lib/python3.6/dist-packages/lightgbm/engine.py:118: UserWarning:
 
@@ -1949,3 +1907,4 @@ exp2()
 So we got local validation ROC AUC of about 0.9196, this is a looks OK score.
 
 This model's prediction on the test dataset got 0.9398 on publica leader board, and 0.9058 on private leader board. These scores have a somehow big gap to the top scores, but still good enough as there're potentially many ways for improvement. For example, more different ways of transformations and engineering could be performed on the features, try model implementation like CatBoost and XGB, and search for better hyper-parameters. But it assumes you have plenty of computation resource and time.
+````

@@ -1,0 +1,450 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "values": [
+      {
+        "tag": "python",
+        "count": 425
+      },
+      {
+        "tag": "golang",
+        "count": 272
+      },
+      {
+        "tag": "web",
+        "count": 181
+      },
+      {
+        "tag": "javascript",
+        "count": 155
+      },
+      {
+        "tag": "machine-learning",
+        "count": 129
+      },
+      {
+        "tag": "microservices",
+        "count": 89
+      },
+      {
+        "tag": "deep-learning",
+        "count": 80
+      },
+      {
+        "tag": "neural-networks",
+        "count": 77
+      },
+      {
+        "tag": "api",
+        "count": 67
+      },
+      {
+        "tag": "data-science",
+        "count": 60
+      },
+      {
+        "tag": "java",
+        "count": 53
+      },
+      {
+        "tag": "node.js",
+        "count": 50
+      },
+      {
+        "tag": "testing",
+        "count": 48
+      },
+      {
+        "tag": "concurrency",
+        "count": 47
+      },
+      {
+        "tag": "vue.js",
+        "count": 42
+      },
+      {
+        "tag": "db",
+        "count": 39
+      },
+      {
+        "tag": "system-architecture",
+        "count": 39
+      },
+      {
+        "tag": "react",
+        "count": 39
+      },
+      {
+        "tag": "compiler",
+        "count": 35
+      },
+      {
+        "tag": "docker",
+        "count": 35
+      },
+      {
+        "tag": "http",
+        "count": 33
+      },
+      {
+        "tag": "kubernetes",
+        "count": 32
+      },
+      {
+        "tag": "rust",
+        "count": 32
+      },
+      {
+        "tag": "git",
+        "count": 32
+      },
+      {
+        "tag": "django",
+        "count": 31
+      },
+      {
+        "tag": "restful",
+        "count": 31
+      },
+      {
+        "tag": "cpp",
+        "count": 31
+      },
+      {
+        "tag": "data-visualization",
+        "count": 31
+      },
+      {
+        "tag": "nlp",
+        "count": 30
+      },
+      {
+        "tag": "oop",
+        "count": 29
+      },
+      {
+        "tag": "kafka",
+        "count": 28
+      },
+      {
+        "tag": "angular",
+        "count": 27
+      },
+      {
+        "tag": "graphql",
+        "count": 27
+      },
+      {
+        "tag": "linux",
+        "count": 26
+      },
+      {
+        "tag": "programming",
+        "count": 26
+      },
+      {
+        "tag": "css",
+        "count": 25
+      },
+      {
+        "tag": "frontend",
+        "count": 25
+      },
+      {
+        "tag": "security",
+        "count": 25
+      },
+      {
+        "tag": "interpreter",
+        "count": 22
+      },
+      {
+        "tag": "functional-programming",
+        "count": 22
+      },
+      {
+        "tag": "distributed-system",
+        "count": 21
+      },
+      {
+        "tag": "chatbot",
+        "count": 20
+      },
+      {
+        "tag": "c",
+        "count": 19
+      },
+      {
+        "tag": "r",
+        "count": 19
+      },
+      {
+        "tag": "ai",
+        "count": 19
+      },
+      {
+        "tag": "mysql",
+        "count": 18
+      },
+      {
+        "tag": "http2",
+        "count": 18
+      },
+      {
+        "tag": "debug",
+        "count": 17
+      },
+      {
+        "tag": "tensorflow",
+        "count": 17
+      },
+      {
+        "tag": "asyncio",
+        "count": 17
+      },
+      {
+        "tag": "tdd",
+        "count": 16
+      },
+      {
+        "tag": "pandas",
+        "count": 16
+      },
+      {
+        "tag": "error-handling",
+        "count": 16
+      },
+      {
+        "tag": "memory",
+        "count": 16
+      },
+      {
+        "tag": "performance",
+        "count": 15
+      },
+      {
+        "tag": "algorithm",
+        "count": 15
+      },
+      {
+        "tag": "semantic-web",
+        "count": 15
+      },
+      {
+        "tag": "emacs",
+        "count": 15
+      },
+      {
+        "tag": "auth",
+        "count": 14
+      },
+      {
+        "tag": "grpc",
+        "count": 13
+      },
+      {
+        "tag": "computer-vision",
+        "count": 13
+      },
+      {
+        "tag": "pascal",
+        "count": 13
+      },
+      {
+        "tag": "statistics",
+        "count": 13
+      },
+      {
+        "tag": "redis",
+        "count": 13
+      },
+      {
+        "tag": "big-data",
+        "count": 13
+      },
+      {
+        "tag": "numpy",
+        "count": 13
+      },
+      {
+        "tag": "postgres",
+        "count": 12
+      },
+      {
+        "tag": "refactoring",
+        "count": 12
+      },
+      {
+        "tag": "mongodb",
+        "count": 12
+      },
+      {
+        "tag": "programmer-development",
+        "count": 12
+      },
+      {
+        "tag": "data-structure",
+        "count": 12
+      },
+      {
+        "tag": "pwa",
+        "count": 12
+      },
+      {
+        "tag": "finance",
+        "count": 11
+      },
+      {
+        "tag": "graphdb",
+        "count": 11
+      },
+      {
+        "tag": "asynchronous",
+        "count": 11
+      },
+      {
+        "tag": "json",
+        "count": 11
+      },
+      {
+        "tag": "cloud-computing",
+        "count": 11
+      },
+      {
+        "tag": "web-scraping",
+        "count": 11
+      },
+      {
+        "tag": "html",
+        "count": 11
+      },
+      {
+        "tag": "spark",
+        "count": 11
+      },
+      {
+        "tag": "blockchain",
+        "count": 11
+      },
+      {
+        "tag": "webpack",
+        "count": 11
+      },
+      {
+        "tag": "vim",
+        "count": 11
+      },
+      {
+        "tag": "dotnet",
+        "count": 10
+      },
+      {
+        "tag": "jwt",
+        "count": 10
+      },
+      {
+        "tag": "sql",
+        "count": 9
+      },
+      {
+        "tag": "stock",
+        "count": 9
+      },
+      {
+        "tag": "csharp",
+        "count": 9
+      },
+      {
+        "tag": "log",
+        "count": 9
+      },
+      {
+        "tag": "lxc",
+        "count": 9
+      },
+      {
+        "tag": "kotlin",
+        "count": 9
+      },
+      {
+        "tag": "storage",
+        "count": 8
+      },
+      {
+        "tag": "multithreading",
+        "count": 8
+      },
+      {
+        "tag": "scala",
+        "count": 8
+      },
+      {
+        "tag": "interface",
+        "count": 8
+      },
+      {
+        "tag": "spring",
+        "count": 8
+      },
+      {
+        "tag": "jit",
+        "count": 8
+      },
+      {
+        "tag": "flask",
+        "count": 8
+      },
+      {
+        "tag": "design-pattern",
+        "count": 8
+      },
+      {
+        "tag": "websocket",
+        "count": 8
+      }
+    ]
+  },
+  "mark": {
+    "type": "bar",
+    "tooltip": true
+  },
+  "width": "container",
+  "height": 420,
+  "encoding": {
+    "x": {
+      "field": "tag",
+      "type": "ordinal",
+      "sort": "-y",
+      "axis": {
+        "labelAngle": -45
+      }
+    },
+    "y": {
+      "field": "count",
+      "type": "quantitative",
+      "title": "Number of infos"
+    },
+    "tooltip": [
+      {
+        "field": "tag",
+        "type": "nominal"
+      },
+      {
+        "field": "count",
+        "type": "quantitative"
+      }
+    ]
+  },
+  "config": {
+    "axis": {
+      "labelFontSize": 11
+    },
+    "view": {
+      "stroke": null
+    },
+    "autosize": {
+      "type": "fit",
+      "contains": "padding"
+    }
+  }
+}

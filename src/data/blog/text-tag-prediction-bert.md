@@ -28,7 +28,7 @@ Due to the limited computation capacity, we'll use a smaller BERT model - BERT-M
 
 Now we firstly load the dataset. And then load the pretrained BERT tokenizer and model. Note that we only load the article samples that are in English since the BERT-Mini model here were pretrained in English.
 
-```
+```python
 import os
 from collections import Counter
 
@@ -62,13 +62,13 @@ nltk.download('punkt')
 RAND_STATE = 20200122
 ```
 
-```
+```python
 ds = dataset.ds_info_tags(from_batch_cache='info', lan='en',
                           concate_title=True,
                           filter_tags_threshold=0, partial_len=3000)
 ```
 
-```
+```python
 c = Counter([tag for tags in ds.target_decoded for tag in tags])
 
 dfc = pd.DataFrame.from_dict(c, orient='index', columns=['count']).sort_values(by='count', ascending=False)[:100]
@@ -80,58 +80,16 @@ fig_Y = px.bar(dfc, x=dfc.index, y='count',
 fig_Y.update_traces(texttemplate='%{text}')
 ```
 
-<html>
-<head><meta charset="utf-8" /></head>
-<body>
-    <div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>
-                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    
-            <div id="d7db1ccb-6f97-4d35-a5b0-eda705ab1bdb" class="plotly-graph-div" style="height:525px; width:100%;"></div>
-            <script type="text/javascript">
-                
-                    window.PLOTLYENV=window.PLOTLYENV || {};
-                    
-                if (document.getElementById("d7db1ccb-6f97-4d35-a5b0-eda705ab1bdb")) {
-                    Plotly.newPlot(
-                        'd7db1ccb-6f97-4d35-a5b0-eda705ab1bdb',
-                        [{"alignmentgroup": "True", "hoverlabel": {"namelength": 0}, "hovertemplate": "Tags=%{x}<br>Number of infos=%{text}", "legendgroup": "", "marker": {"color": "#636efa"}, "name": "", "offsetgroup": "", "orientation": "v", "showlegend": false, "text": [425.0, 272.0, 181.0, 155.0, 129.0, 89.0, 80.0, 77.0, 67.0, 60.0, 53.0, 50.0, 48.0, 47.0, 42.0, 39.0, 39.0, 39.0, 35.0, 35.0, 33.0, 32.0, 32.0, 32.0, 31.0, 31.0, 31.0, 31.0, 30.0, 29.0, 28.0, 27.0, 27.0, 26.0, 26.0, 25.0, 25.0, 25.0, 22.0, 22.0, 21.0, 20.0, 19.0, 19.0, 19.0, 18.0, 18.0, 17.0, 17.0, 17.0, 16.0, 16.0, 16.0, 16.0, 15.0, 15.0, 15.0, 15.0, 14.0, 13.0, 13.0, 13.0, 13.0, 13.0, 13.0, 13.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 11.0, 11.0, 11.0, 11.0, 11.0, 11.0, 11.0, 11.0, 11.0, 11.0, 11.0, 10.0, 10.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0], "textposition": "auto", "texttemplate": "%{text}", "type": "bar", "x": ["python", "golang", "web", "javascript", "machine-learning", "microservices", "deep-learning", "neural-networks", "api", "data-science", "java", "node.js", "testing", "concurrency", "vue.js", "db", "system-architecture", "react", "compiler", "docker", "http", "kubernetes", "rust", "git", "django", "restful", "cpp", "data-visualization", "nlp", "oop", "kafka", "angular", "graphql", "linux", "programming", "css", "frontend", "security", "interpreter", "functional-programming", "distributed-system", "chatbot", "c", "r", "ai", "mysql", "http2", "debug", "tensorflow", "asyncio", "tdd", "pandas", "error-handling", "memory", "performance", "algorithm", "semantic-web", "emacs", "auth", "grpc", "computer-vision", "pascal", "statistics", "redis", "big-data", "numpy", "postgres", "refactoring", "mongodb", "programmer-development", "data-structure", "pwa", "finance", "graphdb", "asynchronous", "json", "cloud-computing", "web-scraping", "html", "spark", "blockchain", "webpack", "vim", "dotnet", "jwt", "sql", "stock", "csharp", "log", "lxc", "kotlin", "storage", "multithreading", "scala", "interface", "spring", "jit", "flask", "design-pattern", "websocket"], "xaxis": "x", "y": [425, 272, 181, 155, 129, 89, 80, 77, 67, 60, 53, 50, 48, 47, 42, 39, 39, 39, 35, 35, 33, 32, 32, 32, 31, 31, 31, 31, 30, 29, 28, 27, 27, 26, 26, 25, 25, 25, 22, 22, 21, 20, 19, 19, 19, 18, 18, 17, 17, 17, 16, 16, 16, 16, 15, 15, 15, 15, 14, 13, 13, 13, 13, 13, 13, 13, 12, 12, 12, 12, 12, 12, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 10, 10, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8], "yaxis": "y"}],
-                        {"barmode": "relative", "legend": {"tracegroupgap": 0}, "margin": {"t": 60}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "xaxis": {"anchor": "y", "domain": [0.0, 1.0], "title": {"text": "Tags"}}, "yaxis": {"anchor": "x", "domain": [0.0, 1.0], "title": {"text": "Number of infos"}}},
-                        {"responsive": true}
-                    ).then(function(){
-                            
-var gd = document.getElementById('d7db1ccb-6f97-4d35-a5b0-eda705ab1bdb');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
+<figure>
+  <iframe
+    src="/vega/embed.html?spec=/vega/text-tag-bert-0-spec.json"
+    title="Tag frequency chart"
+    loading="lazy"
+    style="width:100%;border:0;min-height:540px;"
+  ></iframe>
+</figure>
 
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })
-                };
-
-            </script>
-        </div>
-
-</body>
-</html>
-
-```
+```python
 dfc_tail = pd.DataFrame.from_dict(c, orient='index', columns=['count']).sort_values(by='count', ascending=False)[-200:]
 
 fig_Y = px.bar(dfc_tail, x=dfc_tail.index, y='count',
@@ -141,62 +99,20 @@ fig_Y = px.bar(dfc_tail, x=dfc_tail.index, y='count',
 fig_Y.update_traces(texttemplate='%{text}')
 ```
 
-<html>
-<head><meta charset="utf-8" /></head>
-<body>
-    <div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>
-                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    
-            <div id="93a29e39-9a0c-49f1-9585-5d6ba50f38f5" class="plotly-graph-div" style="height:525px; width:100%;"></div>
-            <script type="text/javascript">
-                
-                    window.PLOTLYENV=window.PLOTLYENV || {};
-                    
-                if (document.getElementById("93a29e39-9a0c-49f1-9585-5d6ba50f38f5")) {
-                    Plotly.newPlot(
-                        '93a29e39-9a0c-49f1-9585-5d6ba50f38f5',
-                        [{"alignmentgroup": "True", "hoverlabel": {"namelength": 0}, "hovertemplate": "Tags=%{x}<br>Number of infos=%{text}", "legendgroup": "", "marker": {"color": "#636efa"}, "name": "", "offsetgroup": "", "orientation": "v", "showlegend": false, "text": [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], "textposition": "auto", "texttemplate": "%{text}", "type": "bar", "x": ["fusion.js", "load-balance", "ethic", "web-services", "aws", "filesystem", "iot", "emacs-lisp", "github", "crawler", "event-driven", "pytorch", "pdf", "lambda", "spacemacs", "pdb", "namespaces", "mvc", "unicode", "sdk", "makefile", "webkit", "cdn", "object-detection", "documentation", "project-management", "cloud", "classification", "jvm", "circuit-breaker", "integration-test", "amqp", "anomaly-detection", "dom", "cloud-storage", "ddd", "vue-router", "activemq", "excel", "linked-list", "linear-programming", "electron", "kernel", "lock-free", "data-mining", "virtual-machine", "d3", "neo4j", "text-editor", "unity", "baas", "information-theory", "messaging", "crdt", "os", "webgl", "anti-pattern", "hadoop", "development", "orm", "voltdb", "linear-model", "consul", "ansible", "pathfinding", "linked-data", "ajax", "rendering-techniques", "random-forests", "photography", "dns", "code-review", "rsa", "bloom-filter", "deployment", "forward+", "token", "gcc", "oracle", "cap", "severless", "wpf", "graphics", "cors", "locale", "ipv6", "apache", "iots", "bytecode", "cookie", "bot", "time-series-analysis", "assembly", "arm", "multiprocessing", "cms", "cassandra", "ggplot", "mesos", "automl", "auditing", "service-architecture", "goroutine", "text-generator", "option", "travis-ci", "gateway", "productivity", "angularjs", "pyspark", "data-pipeline", "raspberry-pi", "service-mesh", "memcached", "quantum-communication", "soa", "ssh", "open-data", "command-line-interface", "yaml", "server", "mac", "monitoring", "translation", "posix", "data-analytics", "hdfs", "recurrent-neural-networks", "word-embedding", "ludwig", "image-recognition", "maven", "wordpress", "elm", "monad", "plotly", "math", "protobuf", "face-recognition", "paxos", "academia", "speech-recognition", "feature-engineering", "babel", "tachyon", "postgresql", "relational-database", "data-workflow", "monkey-patch", "udp", "ehealth", "optimization", "webrtc", "proxy", "cross-validation", "hypothesis-test", "ivy", "markov-chains", "text-recognition", "latex", "openstack", "sqlite", "computer-system", "eslint", "obect-detection", "bokeh", "data-cleaning", "color-topics", "firebase", "doom-emacs", "speech--recognition", "decentralized-web", "tkinter", "ops", "epoll", "index", "lua", "dgraph", "desktop", "reliability", "laravel", "mypy", "access-control", "virtualization", "kvm", "qemu", "csrf", "quantum-computing", "nodejs", "random-forest", "quantum-theory", "socket", "redux", "ide", "postgre", "text-classifier", "etl", "cloud-native", "agile", "sparql"], "xaxis": "x", "y": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "yaxis": "y"}],
-                        {"barmode": "relative", "legend": {"tracegroupgap": 0}, "margin": {"t": 60}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "xaxis": {"anchor": "y", "domain": [0.0, 1.0], "title": {"text": "Tags"}}, "yaxis": {"anchor": "x", "domain": [0.0, 1.0], "title": {"text": "Number of infos"}}},
-                        {"responsive": true}
-                    ).then(function(){
-                            
-var gd = document.getElementById('93a29e39-9a0c-49f1-9585-5d6ba50f38f5');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })
-                };
-
-            </script>
-        </div>
-
-</body>
-</html>
+<figure>
+  <iframe
+    src="/vega/embed.html?spec=/vega/text-tag-bert-1-spec.json"
+    title="Rare tag frequency chart"
+    loading="lazy"
+    style="width:100%;border:0;min-height:540px;"
+  ></iframe>
+</figure>
 
 After we loaded the data, we checked how frequently are the tags being tagged to the articles. Here we only visualized the top-100 tags (you can select area of the figure to zoomin), we can see that there's a big imbalancement of popularity among tags. We can try to mitigate this imbalancement by using different methods like sampling methods and augmentation. But now we'll just pretend we don't know that and leave this aside.
 
 Now let's load the BERT tokenizer and model.
 
-```
+```python
 PRETRAINED_BERT_WEIGHTS = download_once_pretrained_transformers(
     "google/bert_uncased_L-4_H-256_A-4")
 tokenizer = AutoTokenizer.from_pretrained(PRETRAINED_BERT_WEIGHTS)
@@ -205,7 +121,7 @@ model = AutoModel.from_pretrained(PRETRAINED_BERT_WEIGHTS)
 
 Now we encode all the titles by the BERT-Mini model. We'll use only the 1st output vector from the model as it's used for classification task.
 
-```
+```python
 col_text = 'title'
 max_length = ds.data[col_text].apply(lambda x: len(nltk.word_tokenize(x))).max()
 
@@ -229,7 +145,7 @@ As the features are changed from Tf-idf transformed to BERT transformed, so we'l
 
 The scorer we used in grid search is f-0.5 score since we want to weight higher precision over recall.
 
-```
+```python
 train_features, test_features, train_labels, test_labels = train_test_split(
     features, ds.target, test_size=0.3, random_state=RAND_STATE)
 
@@ -328,7 +244,7 @@ Though it's not comparable, the result metrics are no better than the Tf-idf one
 
 Now let's combine the titles and short descriptions to see if there's any improvment.
 
-```
+```python
 col_text = 'description'
 max_length = ds.data[col_text].apply(lambda x: len(nltk.word_tokenize(x))).max()
 encoded = ds.data[col_text].apply(
@@ -347,12 +263,12 @@ with torch.no_grad():
     features = last_hidden_states[0][:, 0, :].numpy()
 ```
 
-```
+```python
 train_features, test_features, train_labels, test_labels = train_test_split(
     features, ds.target, test_size=0.3, random_state=RAND_STATE)
 ```
 
-```
+```python
 clf = OneVsRestClassifier(LinearSVC())
 
 C_OPTIONS = [0.1, 1]
@@ -396,7 +312,7 @@ It would be a good idea to perform stratified sampling for spliting training and
 
 In the code below we have wrapped the split method for brevity.
 
-```
+```python
 COL_TEXT = 'description'
 
 train_features, test_features, train_labels, test_labels = multilearn_iterative_train_test_split(
@@ -452,7 +368,7 @@ As the dataset is quite small, now we'll try to augment the trainig set to see i
 
 Here we set the augmentation level to 2, which means the dataset are concatenated by 2 times of the samples. And the added samples' content will be randomly chopped out as 9/10 of its original content. Of course, both the actions only apply to the training set. The 30% test set is kept aside.
 
-```
+```python
 COL_TEXT = 'description'
 
 train_features, test_features, train_labels, test_labels = multilearn_iterative_train_test_split(
@@ -510,7 +426,7 @@ If you remember that the first time we loaded the data we visualized the appeare
 
 Now let's try to filter out the least appeared tags. Let's start from a big number of 20, i.e., tags appeared in less than 20 articles will be removed.
 
-```
+```python
 col_text = 'description'
 ds_param = dict(from_batch_cache='info', lan='en',
                 concate_title=True,
@@ -528,58 +444,16 @@ fig_Y = px.bar(dfc, x=dfc.index, y='count',
 fig_Y.update_traces(texttemplate='%{text}')
 ```
 
-<html>
-<head><meta charset="utf-8" /></head>
-<body>
-    <div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>
-                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    
-            <div id="1c689a44-bec8-4749-bd6f-2a3cc74c5cd9" class="plotly-graph-div" style="height:525px; width:100%;"></div>
-            <script type="text/javascript">
-                
-                    window.PLOTLYENV=window.PLOTLYENV || {};
-                    
-                if (document.getElementById("1c689a44-bec8-4749-bd6f-2a3cc74c5cd9")) {
-                    Plotly.newPlot(
-                        '1c689a44-bec8-4749-bd6f-2a3cc74c5cd9',
-                        [{"alignmentgroup": "True", "hoverlabel": {"namelength": 0}, "hovertemplate": "Tags=%{x}<br>Number of infos=%{text}", "legendgroup": "", "marker": {"color": "#636efa"}, "name": "", "offsetgroup": "", "orientation": "v", "showlegend": false, "text": [425.0, 272.0, 181.0, 155.0, 129.0, 89.0, 80.0, 77.0, 67.0, 60.0, 53.0, 50.0, 48.0, 47.0, 42.0, 39.0, 39.0, 39.0, 35.0, 35.0, 33.0, 32.0, 32.0, 32.0, 31.0, 31.0, 31.0, 31.0, 30.0, 29.0, 28.0, 27.0, 27.0, 26.0, 26.0, 25.0, 25.0, 25.0, 22.0, 22.0, 21.0], "textposition": "auto", "texttemplate": "%{text}", "type": "bar", "x": ["python", "golang", "web", "javascript", "machine-learning", "microservices", "deep-learning", "neural-networks", "api", "data-science", "java", "node.js", "testing", "concurrency", "vue.js", "system-architecture", "react", "db", "compiler", "docker", "http", "git", "kubernetes", "rust", "restful", "data-visualization", "cpp", "django", "nlp", "oop", "kafka", "graphql", "angular", "programming", "linux", "css", "frontend", "security", "functional-programming", "interpreter", "distributed-system"], "xaxis": "x", "y": [425, 272, 181, 155, 129, 89, 80, 77, 67, 60, 53, 50, 48, 47, 42, 39, 39, 39, 35, 35, 33, 32, 32, 32, 31, 31, 31, 31, 30, 29, 28, 27, 27, 26, 26, 25, 25, 25, 22, 22, 21], "yaxis": "y"}],
-                        {"barmode": "relative", "legend": {"tracegroupgap": 0}, "margin": {"t": 60}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "xaxis": {"anchor": "y", "domain": [0.0, 1.0], "title": {"text": "Tags"}}, "yaxis": {"anchor": "x", "domain": [0.0, 1.0], "title": {"text": "Number of infos"}}},
-                        {"responsive": true}
-                    ).then(function(){
-                            
-var gd = document.getElementById('1c689a44-bec8-4749-bd6f-2a3cc74c5cd9');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
+<figure>
+  <iframe
+    src="/vega/embed.html?spec=/vega/text-tag-bert-2-spec.json"
+    title="Top tags zoomed chart"
+    loading="lazy"
+    style="width:100%;border:0;min-height:540px;"
+  ></iframe>
+</figure>
 
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })
-                };
-
-            </script>
-        </div>
-
-</body>
-</html>
-
-```
+```python
 test_size = 0.3
 train_features, test_features, train_labels, test_labels = multilearn_iterative_train_test_split(
     ds.data, ds.target, test_size=test_size, cols=ds.data.columns)
@@ -635,7 +509,7 @@ The next step is to see if we can make some progress by fine-tuning the BERT-Min
 
 The processing of fine-tuning refers much to [Chris McCormick's post](https://mccormickml.com/2019/07/22/BERT-fine-tuning/).
 
-```
+```python
 col_text = 'description'
 ds_param = dict(from_batch_cache='info', lan='en',
                 concate_title=True,
@@ -652,7 +526,7 @@ train_features, train_labels = dataset.augmented_samples(
 
 The `BertForSequenceMultiLabelClassification` class defined below is basically a copy of the `BertForSequenceClassification` class in huggingface's `Transformers`, only with a small change of adding `sigmoid` the logits from classification and adding ` labels = torch.max(labels, 1)[1]` in `forward` for supporting multilabel.
 
-```
+```python
 class BertForSequenceMultiLabelClassification(BertPreTrainedModel):
     def __init__(self, config):
         super(BertForSequenceMultiLabelClassification, self).__init__(config)
@@ -699,7 +573,7 @@ class BertForSequenceMultiLabelClassification(BertPreTrainedModel):
         return outputs  # (loss), logits, (hidden_states), (attentions)
 ```
 
-```
+```python
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 n_classes = train_labels.shape[1]
 batch_size: int = 16
@@ -754,7 +628,7 @@ scheduler = get_linear_schedule_with_warmup(optimizer,
                                             num_training_steps=total_steps)
 ```
 
-```
+```python
 training_stats = []
 
 
@@ -885,7 +759,7 @@ print('-------------- Completed --------------')
 
 Save the fine-tuned model for later encoding.
 
-```
+```python
 from transformers import WEIGHTS_NAME, CONFIG_NAME, BertTokenizer
 
 output_dir = "./data/models/bert_finetuned_tagthr_20/"
@@ -911,7 +785,7 @@ tokenizer.save_vocabulary(output_dir)
 
 Now let's use the fine-tuned model to get the embeddings for the same SVM classification.
 
-```
+```python
 batch_size = 128
 model_name = output_dir
 
@@ -1019,7 +893,7 @@ Comparing to the early post that the model uses tf-idf to transform the text, we
 
 Let's start with samples only in English still.
 
-```
+```python
 col_text = 'description'
 
 ds_param = dict(from_batch_cache='info', lan='en',
@@ -1118,7 +992,7 @@ classification_report_avg(test_labels, Y_predicted)
 
 Now let's try samples in both English and Chinese.
 
-```
+```python
 col_text = 'description'
 
 ds_param = dict(from_batch_cache='info', lan=None,
@@ -1221,7 +1095,7 @@ The model trained on samples with both languages has a lower precisions but high
 
 Now lets see how would it perform training on the fulltext.
 
-```
+```python
 col_text = 'fulltext'
 
 ds_param = dict(from_batch_cache='fulltext', lan=None,

@@ -15,12 +15,12 @@ The solution in this post is mainly based on some web posts and methods from the
 
 The classification neural network model is tested with pretrained ResNet and DenseNet and implemented with PyTOrch. The model with the highest mean of recalls (0.9369 on 20% test set) is a ensemble of ImageNet pretrained and fine-tuned DenseNet161 + ResNet152.
 
-```python
+````python
 # Confusion matrix of the mdoel with the best recall
 from IPython.display import Image
 
 Image('test_results/ensemble_dense161_6_res152_4_lesion/confusion_matrix.png', width=900)
-```
+```python
 
 ![png](/posts/skin-lesion-cls/output_1_0.png)
 
@@ -35,7 +35,7 @@ import pandas as pd
 
 df = pd.read_csv('data/HAM10000_metadata.csv', index_col='image_id')
 df.head()
-```
+````
 
 <div>
 <style scoped>
@@ -123,11 +123,11 @@ df.head()
 </table>
 </div>
 
-```python
+````python
 import seaborn as sns
 
 sns.countplot(df['dx'])
-```
+```python
 
     <matplotlib.axes._subplots.AxesSubplot at 0x126f39eb8>
 
@@ -135,7 +135,7 @@ sns.countplot(df['dx'])
 
 ```python
 pd.DataFrame({'counts':df['dx'].value_counts(), 'percent': df['dx'].value_counts() / len(df)})
-```
+````
 
 <div>
 <style scoped>
@@ -205,10 +205,10 @@ The class _melanocytic nevi (nv)_ has about 67% of the dataset. The most minorit
 
 When we organize the rows by lesion_id, we can see that many lesions have more than 1 images. The description of ham10000 says the dataset includes lesions with multiple images, which can be tracked by the lesion_id column.
 
-```python
+````python
 dfr=df.reset_index(col_level='lesion_id').set_index(['lesion_id','image_id'])
 dfr.head(10)
-```
+```python
 
 <div>
 <style scoped>
@@ -360,7 +360,7 @@ def plot_by_lesion():
             break
 
 plot_by_lesion()
-```
+````
 
 ![png](/posts/skin-lesion-cls/output_8_0.png)
 
@@ -372,9 +372,9 @@ We can seee that the multiple images capture the same lesion with differences in
 
 Now let's count the images by lesion_id.
 
-```python
+````python
 df['lesion_id'].nunique()
-```
+```python
 
     7470
 
@@ -382,7 +382,7 @@ df['lesion_id'].nunique()
 cnt = df.groupby('dx')['lesion_id'].nunique()
 per = df.groupby('dx')['lesion_id'].nunique().div(df['lesion_id'].nunique())
 pd.DataFrame({'counts':cnt, 'percent': per})
-```
+````
 
 <div>
 <style scoped>
@@ -505,7 +505,7 @@ Since the dataset is very imbalanced, so even though we could use the mean recal
 
 For simplicity, I'll just use the first image of each lesion_id. The code snippet below processes the dataset with oversampling. The parameter `over_rate` controls how much to over sample the minority classes.
 
-```python
+````python
 import functools
 
 exclude_set = []
@@ -563,7 +563,7 @@ if weighted:
 
 
 sns.countplot(train['dx'])
-```
+```python
 
     <matplotlib.axes._subplots.AxesSubplot at 0x12738aa58>
 
@@ -597,11 +597,11 @@ transforms.Compose([
      transforms.Normalize(mean=[0.485, 0.456, 0.406],
                           std=[0.229, 0.224, 0.225])
 ])
-```
+````
 
 As we oversampled minority classes in the training set, we should perform some random transformations, such as random horizontal-vertical flip, rotation and color jitter (saturation not used since I thought it might affect the preciseness of lesion area).
 
-```python
+````python
 # Transformation for training set
 transforms_train = transforms.Compose([
      transforms.Resize(300),
@@ -614,7 +614,7 @@ transforms_train = transforms.Compose([
      transforms.Normalize(mean=[0.485, 0.456, 0.406],
                           std=[0.229, 0.224, 0.225])
 ])
-```
+```python
 
 # Models
 
@@ -653,17 +653,17 @@ best_dense161_lesion = torch.load(
     'experiments/dense161_eq3_exclutest_lesion_v1/model_best.pth.tar',
     map_location=torch.device('cpu'))
 recall_val_dense161_lesion = best_dense161_lesion['metrics']['recall']
-```
+````
 
-```python
+````python
 recall_val_dense161_lesion
-```
+```python
 
     0.684509306993473
 
 ```python
 Image('experiments/dense161_eq3_exclutest_lesion_v1/confusion_matrix.png', width=900)
-```
+````
 
 ![png](/posts/skin-lesion-cls/output_24_0.png)
 
@@ -671,22 +671,22 @@ Image('experiments/dense161_eq3_exclutest_lesion_v1/confusion_matrix.png', width
 
 For the ResNet152, the best validation mean of recalls is about 0.7202.
 
-```python
+````python
 best_res152_lesion = torch.load(
     'experiments/res152_eq3_exclutest_lesion_v1/model_best.pth.tar',
     map_location=torch.device('cpu'))
 recall_val_res152_lesion = best_res152_lesion['metrics']['recall']
-```
+```python
 
 ```python
 recall_val_res152_lesion
-```
+````
 
     0.7202260074093291
 
-```python
+````python
 Image('experiments/res152_eq3_exclutest_lesion_v1/recall.png', width=700)
-```
+```python
 
 ![png](/posts/skin-lesion-cls/output_28_0.png)
 
@@ -709,14 +709,14 @@ def plot_metric(train_loss, test_loss, name, plot_type='loss'):
 train_losses, test_losses = np.load(
     'experiments/res152_eq3_exclutest_lesion_v1/final_results.npy')
 plot_metric(train_losses, test_losses, 'ResNet152_lesion', 'loss')
-```
+````
 
 ![png](/posts/skin-lesion-cls/output_29_0.png)
 
-```python
+````python
 # ResNet152 val
 Image('experiments/res152_eq3_exclutest_lesion_v1/confusion_matrix.png', width=900)
-```
+```python
 
 ![png](/posts/skin-lesion-cls/output_30_0.png)
 
@@ -755,11 +755,11 @@ df_results_lesion = pd.read_json(json.dumps(model_metrics), orient='index').drop
 df_results_lesion['acc'] = df_results_lesion['acc'] / 100
 df_results_lesion = df_results_lesion[['recall', 'prec', 'f1', 'mcc', 'acc']]
 df_results_lesion.columns = ['Recall', 'Precision', 'F1', 'MCC', 'ACC']
-```
+````
 
-```python
+````python
 df_results_lesion.loc[['dense161_lesion','res152_lesion']].round(4)
-```
+```python
 
 <div>
 <style scoped>
@@ -818,7 +818,7 @@ The results are also surprisingly good.
 
 ```python
 df_results_lesion.round(4)
-```
+````
 
 <div>
 <style scoped>
@@ -899,27 +899,27 @@ df_results_lesion.round(4)
 </table>
 </div>
 
-```python
+````python
 Image('test_results/dense161_lesion/confusion_matrix.png', width=900)
-```
+```python
 
 ![png](/posts/skin-lesion-cls/output_37_0.png)
 
 ```python
 Image('test_results/dense161_lesion_mcc/confusion_matrix.png', width=900)
-```
+````
 
 ![png](/posts/skin-lesion-cls/output_38_0.png)
 
-```python
+````python
 Image('test_results/ensemble_dense161_6_res152_4_lesion/confusion_matrix.png', width=900)
-```
+```python
 
 ![png](/posts/skin-lesion-cls/output_39_0.png)
 
 ```python
 Image('test_results/res152_lesion/confusion_matrix.png', width=900)
-```
+````
 
 ![png](/posts/skin-lesion-cls/output_40_0.png)
 

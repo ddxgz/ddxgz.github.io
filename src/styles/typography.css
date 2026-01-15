@@ -35,6 +35,19 @@
       @apply overflow-x-clip;
     }
 
+    /* Prevent migrated notebook HTML (tables/iframes) from blowing out page width */
+    @apply overflow-x-hidden;
+
+    iframe {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* Pandas/Jupyter HTML tables frequently come with `.dataframe` wrappers */
+    .dataframe {
+      @apply max-w-full overflow-x-auto;
+    }
+
     li {
       @apply marker:text-accent;
     }
@@ -52,6 +65,12 @@
     }
 
     table {
+      display: block;
+      width: max-content;
+      max-width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+
       th,
       td {
         @apply border border-border p-2;
