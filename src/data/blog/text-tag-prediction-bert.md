@@ -14,6 +14,8 @@ tags:
 canonicalURL: "https://pcx.linkedinfo.co/post/text-tag-prediction-bert/"
 ---
 
+## Table of contents
+
 # Introduction
 
 This is a follow up post of [Multi-label classification to predict topic tags of technical articles from LinkedInfo.co](https://pcx.linkedinfo.co/post/text-tag-prediction/). We will continute the same task by using BERT.

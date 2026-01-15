@@ -7,6 +7,8 @@ tags: ["Machine Learning", "Fraud Detection"]
 canonicalURL: "https://pcx.linkedinfo.co/post/fraud-detection/"
 ---
 
+## Table of contents
+
 # Introduction
 
 This is a brief walk through of the Kaggle challenge IEEE-CIS Fraud Detection. The process in this post is not meant to compete the top solution by performing an extre feature engineering and a greedy search for the best model with hyper-parameters. This is just to walk through the problem and demonstrate a relatively good solution, by doing feature analysis and a few experiments with reference to other's methods.

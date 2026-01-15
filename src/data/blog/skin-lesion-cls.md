@@ -7,6 +7,8 @@ tags: ["Image Classification", "Deep Learning", "Machine Learning"]
 canonicalURL: "https://pcx.linkedinfo.co/post/skin-lesion-cls/"
 ---
 
+## Table of contents
+
 # Introduction
 
 In this post we will show how to do skin lesion image classification with deep neural networks. It is an image classifier trained on the HAM10000 dataset, the same problem in the International Skin Imaging Collaboration (ISIC) 2018 challenge task3.

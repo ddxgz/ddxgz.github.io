@@ -26,7 +26,7 @@ So let's start to explore the data with the data description.
  <!-- * [neural_model], -->
  <!-- * models stats, -->
 
-{{% toc %}}
+## Table of contents
 
 ```python
 import os

@@ -22,7 +22,6 @@ This code snippet is to predict topic tags based on the text of an article. Each
 
 In this snippet, we will use `OneVsRestClassifier` (the One-Vs-the-Rest) in scikit-learn to process the multi-label classification. The article data will be retrieved from [LinkedInfo.co](https://linkedinfo.co) via Web API. The methods in this snippet should give credits to [Working With Text Data - scikit-learn](https://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html) and [this post](https://towardsdatascience.com/journey-to-the-center-of-multi-label-classification-384c40229bff).
 
-
 ## Table of contents
 
 ## Preprocessing data and explore the method
