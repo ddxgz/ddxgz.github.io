@@ -102,12 +102,16 @@ const structuredData = {
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
-    {SITE.seo.twitterSite && (
-      <meta name="twitter:site" content={SITE.seo.twitterSite} />
-    )}
-    {SITE.seo.twitterCreator && (
-      <meta name="twitter:creator" content={SITE.seo.twitterCreator} />
-    )}
+    {
+      SITE.seo.twitterSite && (
+        <meta name="twitter:site" content={SITE.seo.twitterSite} />
+      )
+    }
+    {
+      SITE.seo.twitterCreator && (
+        <meta name="twitter:creator" content={SITE.seo.twitterCreator} />
+      )
+    }
 
     <!-- Google JSON-LD Structured data -->
     <script
