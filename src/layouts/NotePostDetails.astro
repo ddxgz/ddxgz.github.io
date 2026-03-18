@@ -1,0 +1,190 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Datetime from "@/components/Datetime.astro";
+import ShareLinks from "@/components/ShareLinks.astro";
+import BackButton from "@/components/BackButton.astro";
+import BackToTopButton from "@/components/BackToTopButton.astro";
+import { slugifyStr } from "@/utils/slugify";
+import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
+import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
+import { SITE } from "@/config";
+
+export interface Props {
+  post: CollectionEntry<"notes">;
+  posts: CollectionEntry<"notes">[];
+}
+
+const { post, posts } = Astro.props;
+
+const {
+  title,
+  author,
+  description,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+  timezone,
+  links,
+} = post.data;
+
+const { Content } = await render(post);
+
+const layoutProps = {
+  title: `${title} | ${SITE.title}`,
+  author,
+  description,
+  pubDatetime,
+  modDatetime,
+  canonicalURL,
+  scrollSmooth: true,
+};
+
+const allPosts = posts.map(({ data: { title }, id }) => ({
+  id,
+  title,
+}));
+
+const currentPostIndex = allPosts.findIndex(a => a.id === post.id);
+const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
+const nextPost =
+  currentPostIndex !== allPosts.length - 1
+    ? allPosts[currentPostIndex + 1]
+    : null;
+---
+
+<Layout {...layoutProps}>
+  <Header />
+  <BackButton />
+  <main
+    id="main-content"
+    class:list={[
+      "mx-auto w-full max-w-app px-4 pb-12",
+      { "mt-8": !SITE.showBackButton },
+    ]}
+    data-pagefind-body
+  >
+    <h1
+      transition:name={slugifyStr(title)}
+      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+    >
+      {title}
+    </h1>
+    <div class="my-2 flex items-center gap-2">
+      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+    </div>
+    {
+      links && links.length > 0 && (
+        <div class="my-3 flex flex-wrap gap-2">
+          {links.map(link => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 rounded border border-accent/40 px-2 py-1 text-sm text-accent hover:bg-accent/10"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+              {link.name}
+            </a>
+          ))}
+        </div>
+      )
+    }
+    <article
+      id="article"
+      class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
+    >
+      <Content />
+    </article>
+
+    <hr class="my-8 border-dashed" />
+
+    <BackToTopButton />
+
+    <ShareLinks />
+
+    <hr class="my-6 border-dashed" />
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {
+        prevPost && (
+          <a
+            href={`/notes/${prevPost.id}/`}
+            class="flex w-full gap-1 hover:opacity-75"
+          >
+            <IconChevronLeft class="inline-block flex-none rtl:rotate-180" />
+            <div>
+              <span>Previous Note</span>
+              <div class="text-sm text-accent/85">{prevPost.title}</div>
+            </div>
+          </a>
+        )
+      }
+      {
+        nextPost && (
+          <a
+            href={`/notes/${nextPost.id}/`}
+            class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
+          >
+            <div>
+              <span>Next Note</span>
+              <div class="text-sm text-accent/85">{nextPost.title}</div>
+            </div>
+            <IconChevronRight class="inline-block flex-none rtl:rotate-180" />
+          </a>
+        )
+      }
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline data-astro-rerun>
+  function createProgressBar() {
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    progressContainer.appendChild(progressBar);
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+
+  updateScrollProgress();
+</script>
