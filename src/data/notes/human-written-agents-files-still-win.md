@@ -16,6 +16,7 @@ Hi fellow developers, do you let your coding agent generate `AGENTS.md`? You may
 A recent paper by [Gloaguen et al.](https://arxiv.org/abs/2602.11988) evaluated whether repo context files help coding agents. They found that:
 
 if repo context files help coding agents. They found that
+
 - LLM-generated context files reduced task success rate by a small percentage (-0.5% on SWE-bench Lite and -2% on AGENTbench).
 - While human-written group improved by ~4%.
 

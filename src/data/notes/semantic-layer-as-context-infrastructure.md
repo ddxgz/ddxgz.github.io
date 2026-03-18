@@ -8,8 +8,7 @@ tags:
   - semantic-layer
 ---
 
-
-Continuing some thoughts on context for AI agents. Lately I've been revisiting the semantic layer for structured data. 
+Continuing some thoughts on context for AI agents. Lately I've been revisiting the semantic layer for structured data.
 
 In a [previous post](/posts/beyond-answers-below-autonomy), I touched on the gap between explicit and implicit context and the problem of capturing the reasoning and trace that connects information to historical decisions and actions. The core problem is that this context is often scattered in different systems and people's minds.
 
