@@ -25,7 +25,14 @@ Useful scripts:
 
 ## Deployment
 
-The site is designed for static hosting (GitHub Pages, Cloudflare Pages, etc.). Run `pnpm run build` and deploy the contents of `dist/` to your host of choice. Continuous deployment from the `main` branch keeps https://ddxgz.github.io up to date.
+The site is designed for static hosting (GitHub Pages, Cloudflare Pages, etc.). Run `pnpm run build` and deploy the contents of `dist/` to your host of choice. Continuous deployment from the `master` branch keeps https://ddxgz.github.io up to date.
+
+### Scheduled publishing note
+
+- Notes and posts are filtered at build time based on `pubDatetime` and `scheduledPostMargin`.
+- GitHub Pages only republishes on `push` or manual workflow runs, so a note can still be missing from the live site if its publish time has not passed when the last build ran.
+- Use the correct timezone offset in `pubDatetime`. For Stockholm local time that usually means `+01:00` in winter and `+02:00` in summer.
+- If a scheduled note is missing after its publish time, rerun the Pages workflow or push a new commit to trigger a fresh build.
 
 ## Format code before commit
 
