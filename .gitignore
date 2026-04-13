@@ -2,6 +2,10 @@
 output/
 .tmp/
 
+# local Python tooling for one-off graphics scripts
+.venv-diagram/
+.mplconfig/
+
 # build output
 dist/
 
