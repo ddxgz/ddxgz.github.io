@@ -129,14 +129,13 @@ const recentNotes = sortedNotes.slice(0, SITE.notesPerIndex);
     }
 
     {
-      recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
+      recentNotes.length > 0 && (
+        <section id="recent-notes" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">Latest Notes</h2>
           <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} />
-            )}
+            {recentNotes.map(data => (
+              <NoteCard variant="h3" {...data} />
+            ))}
           </ul>
         </section>
       )
@@ -145,13 +144,14 @@ const recentNotes = sortedNotes.slice(0, SITE.notesPerIndex);
     {recentPosts.length > 0 && recentNotes.length > 0 && <Hr />}
 
     {
-      recentNotes.length > 0 && (
-        <section id="recent-notes" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Latest Notes</h2>
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
           <ul>
-            {recentNotes.map(data => (
-              <NoteCard variant="h3" {...data} />
-            ))}
+            {recentPosts.map(
+              (data, index) =>
+                index < SITE.postPerIndex && <Card variant="h3" {...data} />
+            )}
           </ul>
         </section>
       )
