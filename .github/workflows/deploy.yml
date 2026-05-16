@@ -33,7 +33,7 @@ jobs:
         with:
           path: .
           node-version: 20
-          package-manager: pnpm@latest
+          package-manager: pnpm@10.11.1
 
   deploy:
     needs: build
