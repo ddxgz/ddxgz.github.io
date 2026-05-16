@@ -1,7 +1,7 @@
 ---
 title: "ARC-AGI-3 shows there is still a huge gap between frontier models and humans on agentic intelligence"
 description: "GPT-5.5 and Opus 4.7 scored below 1% while human baseline is 100% on ARC-AGI-3, where models need to explore and learn in the novel game-style environments."
-pubDatetime: 2026-05-16T19:37:46+02:00
+pubDatetime: 2026-05-16T14:35:00+02:00
 tags:
   - arc-agi-3
   - benchmarks
