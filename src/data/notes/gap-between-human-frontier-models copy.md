@@ -24,6 +24,6 @@ Alibaba's Qwen team introduced [HLE-Verified](https://arxiv.org/html/2602.13964v
 
 Another challenge is that, some benchmark answers can be stable, like mathematics and history. But in biology, medicine, chemistry, social science, and parts of engineering, today's correct answer can be revised by new evidence, better measurement, or a change in expert consensus.
 
-These challenges do not make the benchmark useless, they just need **maintenance, audits and rolling updates**. 
+These challenges do not make the benchmark useless, they just need **maintenance, audits and rolling updates**.
 
 Another point is the next time when we read those benchmark scores, we should also ask how reliable are the benchmarks themselves.
