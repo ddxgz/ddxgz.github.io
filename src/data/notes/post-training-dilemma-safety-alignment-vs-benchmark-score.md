@@ -58,8 +58,12 @@ The only semi-concerning thing they found is that GPT-5.5 was participation in p
 
 Applause to Gemini 3 Pro, it was one of the strongest Vending Bench performers. Andon Labs described it as a persistent negotiator. It was then by passed by Opus who gained advantage by mis-behaviours.
 
-Without strong safety and ethical pre-conditions, the models have "more options" to pursue the goals, which may lead to better score, but come with bad behaviours. So theoretically, if less safety alignment was done in model post-training, the models have the potential to score higher in some tasks.
+Without strong safety and ethical pre-conditions, the models have "more options" to pursue the goals, which may lead to better score, but come with bad behaviours. So theoretically, if less safety alignment was done in post-training, the models have the potential to score higher in some tasks.
 
-If that path is real, how do we prevent frontier model labs from loosing up safety alignment for pursuing "higher model performance"?
+I know this is a strong claim without evidence, so don't take this seriously yet. But there is related study show that safety alignment can create tradeoffs with capability, reasoning, and agent behavior. For example, [Safety Tax: Safety Alignment Makes Your Large Reasoning Models Less Reasonable](https://arxiv.org/abs/2503.00555) finds that safety alignment can restore harmlessness but degrading the model's reasoning performance. 
+
+This does not prove that less safety means better performance, but it supports the concern that safety alignment is not free. It can change what strategies remain available to the model when it is optimizing for a benchmark score.
+
+But if that path is real, how do we prevent frontier model labs from loosing up safety alignment for pursuing "higher model performance"?
 
 Connecting with the recent Fable 5's great capability but with safety jailbreak issue, it becomes more concerning. Anthropic branded itself as ai safety first when it started, but now its models show most mis-behaviours. Dario probably should spend less time on spreading AI anxiety, but spend more time on meeting Anthropic's AI safety narrative.
