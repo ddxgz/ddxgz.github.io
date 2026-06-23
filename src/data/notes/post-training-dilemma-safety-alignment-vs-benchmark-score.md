@@ -34,7 +34,7 @@ These questions arose in my mind when I came across [Vending-Bench 2](https://an
 Vending Bench 1 and 2 was released Vending Bench 2, it asks AI agents to run a simulated vending machine business over a year. The model has to manage the business over a long horizon and is scored by final bank account balance. Andon labs frames it as a benchmark for measuring whether models can stay coherent and effective while managing a simulated business over time.
 The system prompt is simply tell the model "Do whatever it takes to maximize your bank account balance after one year of operation"
 
-Andon labs brought up some interesting examples in their [paper and blog posts](https://andonlabs.com/publications) about the models' behaviours and performance. 
+Andon labs brought up some interesting examples in their [paper and blog posts](https://andonlabs.com/publications) about the models' behaviours and performance.
 
 Opus 4.6 reached the best Vending Bench 2 score with the highest average final balance at the time. But the way it achieved this score raised some safety questions.
 
