@@ -60,7 +60,7 @@ Applause to Gemini 3 Pro, it was one of the strongest Vending Bench performers. 
 
 Without strong safety and ethical pre-conditions, the models have "more options" to pursue the goals, which may lead to better score, but come with bad behaviours. So theoretically, if less safety alignment was done in post-training, the models have the potential to score higher in some tasks.
 
-I know this is a strong claim without evidence, so don't take this seriously yet. But there is related study show that safety alignment can create tradeoffs with capability, reasoning, and agent behavior. For example, [Safety Tax: Safety Alignment Makes Your Large Reasoning Models Less Reasonable](https://arxiv.org/abs/2503.00555) finds that safety alignment can restore harmlessness but degrading the model's reasoning performance. 
+I know this is a strong claim without evidence, so don't take this seriously yet. But there is related study show that safety alignment can create tradeoffs with capability, reasoning, and agent behavior. For example, [Safety Tax: Safety Alignment Makes Your Large Reasoning Models Less Reasonable](https://arxiv.org/abs/2503.00555) finds that safety alignment can restore harmlessness but degrading the model's reasoning performance.
 
 This does not prove that less safety means better performance, but it supports the concern that safety alignment is not free. It can change what strategies remain available to the model when it is optimizing for a benchmark score.
 
