@@ -10,7 +10,7 @@ tags:
 
 About three months ago when I posted about **ARC-AGI-3**, GPT-5.5 and Claude Opus 4.7 both scored below **1%**.
 
-Now there is a lot of progress. 
+Now there is a lot of progress.
 
 Claude Opus 5 has reached [**30.2%** on ARC-AGI-3’s verified semi-private evaluation set](https://arcprize.org/results/anthropic-claude-opus-5). It's a huge jump from GPT-5.6 Sol’s previous verified score of **7.8%** on the same evaluation set.
 
