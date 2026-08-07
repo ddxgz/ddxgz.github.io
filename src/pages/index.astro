@@ -137,6 +137,12 @@ const recentNotes = sortedNotes.slice(0, SITE.notesPerIndex);
               <NoteCard variant="h3" {...data} />
             ))}
           </ul>
+          <div class="mt-4 flex justify-center">
+            <LinkButton href="/notes/">
+              All Notes
+              <IconArrowRight class="inline-block rtl:-rotate-180" />
+            </LinkButton>
+          </div>
         </section>
       )
     }
@@ -153,24 +159,15 @@ const recentNotes = sortedNotes.slice(0, SITE.notesPerIndex);
                 index < SITE.postPerIndex && <Card variant="h3" {...data} />
             )}
           </ul>
+          <div class="mt-4 flex justify-center">
+            <LinkButton href="/posts/">
+              All Posts
+              <IconArrowRight class="inline-block rtl:-rotate-180" />
+            </LinkButton>
+          </div>
         </section>
       )
     }
-
-    <div class="my-8 flex flex-wrap justify-center gap-4 text-center">
-      <LinkButton href="/posts/">
-        All Posts
-        <IconArrowRight class="inline-block rtl:-rotate-180" />
-      </LinkButton>
-      {
-        recentNotes.length > 0 && (
-          <LinkButton href="/notes/">
-            All Notes
-            <IconArrowRight class="inline-block rtl:-rotate-180" />
-          </LinkButton>
-        )
-      }
-    </div>
   </main>
   <Footer />
 </Layout>
