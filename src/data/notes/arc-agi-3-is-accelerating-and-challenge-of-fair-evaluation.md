@@ -20,12 +20,14 @@ The 30.2% and 38.3% scores are not comparable as they were measured on differen
 
 This raises an important question for agent benchmarks:
 
-**Where should we draw the boundary between the model and the agent system around it?**
+Where should we draw the boundary between the model and the agent system around it?
+
+How do we ensure fair comparisons while also allowing each model to perform with a harness that reflects how it would be used in practice?
 
 For long-horizon tasks like ARC-AGI-3, memory, state management, and context handling can have a significant impact on performance. These capabilities may be essential parts of practical AI systems, but they also make evaluation more complicated.
 
 Benchmark evaluation should reflect improvements in general intelligence, not just improvements from optimising for a particular evaluation. But the models still need the tools to manage their own context.
 
-How do we ensure fair comparisons while also allowing each model to perform with a harness that reflects how it would be used in practice?
+[ARC Prize says](https://x.com/arcprize/status/2082672003765670160) they are working with several labs to incorporate these server-side state-management into its verified testing while preserving consistency across model providers.
 
-[ARC Prize says](https://x.com/arcprize/status/2082672003765670160?utm_source=chatgpt.com) they are working with several labs to incorporate these server-side state-management findings into its verified testing while preserving consistency across model providers.
+Should benchmarks report both a score with benchmark's harness for fair comparison and a score using the harness best suited to each model?
