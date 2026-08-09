@@ -28,4 +28,4 @@ Benchmark evaluation should reflect improvements in general intelligence, not ju
 
 How do we ensure fair comparisons while also allowing each model to perform with a harness that reflects how it would be used in practice?
 
-[ARC Prize says](https://x.com/arcprize/status/2082672003765670160?utm_source=chatgpt.com) they are working with several labs to incorporate these server-side state-management findings into its verified testing while preserving consistency across model providers.
+[ARC Prize says](https://x.com/arcprize/status/2082672003765670160) they are working with several labs to incorporate these server-side state-management findings into its verified testing while preserving consistency across model providers.
