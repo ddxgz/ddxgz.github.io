@@ -205,6 +205,26 @@ const llmsHref = getRelativeLocaleUrl(locale, "llms.txt");
     <slot />
     <script>
       import "@/scripts/theme";
+
+      window.addEventListener("message", event => {
+        if (
+          event.origin !== window.location.origin ||
+          event.data?.type !== "vega-embed:resize"
+        ) {
+          return;
+        }
+
+        const height = Number(event.data.height);
+        if (!Number.isFinite(height) || height <= 0) return;
+
+        const iframe = Array.from(
+          document.querySelectorAll<HTMLIFrameElement>(
+            'iframe[src^="/vega/embed.html"]'
+          )
+        ).find(candidate => candidate.contentWindow === event.source);
+
+        if (iframe) iframe.style.height = `${Math.ceil(height)}px`;
+      });
     </script>
   </body>
 </html>
