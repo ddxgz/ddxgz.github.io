@@ -1,10 +1,10 @@
 ---
 import { render, type CollectionEntry, getCollection } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
+import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Main from "@/layouts/Main.astro";
-import { SITE } from "@/config";
+import Main from "@/components/Main.astro";
+import config from "@/config";
 import { getPublicationPath } from "@/utils/getPublicationPath";
 
 export interface Props {
@@ -27,8 +27,8 @@ const { title, description, pubDatetime, authors, type, pdfUrl, doiUrl } =
   publication.data;
 ---
 
-<Layout
-  title={`${title} | ${SITE.title}`}
+<PostLayout
+  title={`${title} | ${config.site.title}`}
   description={description ?? title}
   pubDatetime={pubDatetime}
 >
@@ -68,4 +68,4 @@ const { title, description, pubDatetime, authors, type, pdfUrl, doiUrl } =
     </article>
   </Main>
   <Footer />
-</Layout>
+</PostLayout>

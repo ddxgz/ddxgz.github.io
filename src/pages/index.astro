@@ -1,83 +1,60 @@
 ---
 import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
-import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
 import NoteCard from "@/components/NoteCard.astro";
-import Hr from "@/components/Hr.astro";
-import getSortedPosts from "@/utils/getSortedPosts";
+import LinkButton from "@/components/LinkButton.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
 import getSortedNotes from "@/utils/getSortedNotes";
-import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
-import { SITE } from "@/config";
-import { SOCIALS } from "@/constants";
+import config from "@/config";
+import { siteExtensions } from "@/site-extensions.config";
 
-const posts = await getCollection("blog");
+const { site, socials, posts: postsConfig } = config;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+
+const posts = await getCollection("posts");
 const notes = await getCollection("notes");
-
 const sortedPosts = getSortedPosts(posts);
 const sortedNotes = getSortedNotes(notes);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
-const recentNotes = sortedNotes.slice(0, SITE.notesPerIndex);
+const recentNotes = sortedNotes.slice(0, siteExtensions.notesPerIndex);
+const homePath = getRelativeLocaleUrl(locale, "");
 ---
 
 <Layout>
   <Header />
-  <main id="main-content" data-layout="index">
-    <section id="hero" class="pt-8 pb-6">
+  <main
+    id="main-content"
+    data-layout="index"
+    data-home-path={homePath}
+    class="app-layout"
+  >
+    <section id="hero" class="border-border border-b pt-8 pb-6">
       <div class="flex flex-wrap items-baseline gap-x-3 gap-y-2">
-        <!-- <h1 class="my-0 inline-block text-4xl font-bold sm:text-5xl"> -->
-        {SITE.author}
-        <!-- </h1> -->
+        <h1 class="text-2xl font-semibold sm:text-3xl">{site.author}</h1>
         <span class="text-sm opacity-80">Stockholm, Sweden</span>
       </div>
-
-      <!-- <p class="mt-4 text-lg font-semibold">
-        Senior AI Engineer / Solution Architect
-      </p> -->
-      <p class="mt-2">
-        I’m a Engineer / Architect / Builder. For more details about me, see <a
-          href="/about">About</a
+      <p class="mt-4">
+        I’m an Engineer / Architect / Builder. For more details about me, see
+        <a
+          class="hover:text-accent underline decoration-dashed underline-offset-4"
+          href={getRelativeLocaleUrl(locale, "about")}>About</a
         >.
       </p>
       <p class="mt-2">
         This is a reboot for writing my notes and thoughts online after several
         years of pause.
       </p>
-
-      <!-- <div class="mt-6 flex flex-wrap gap-3">
-        <LinkButton
-          href="https://www.linkedin.com/in/cong-peng-0711395a/"
-          class="rounded border border-border px-4 py-2 no-underline hover:border-accent"
-          ariaLabel="LinkedIn profile"
-          title="LinkedIn"
-        >
-          LinkedIn
-        </LinkButton>
-        <LinkButton
-          href="mailto:cong.peng@actorise.com"
-          class="rounded border border-border px-4 py-2 no-underline hover:border-accent"
-          ariaLabel="Email Cong Peng"
-          title="Email"
-        >
-          Email
-        </LinkButton>
-        <LinkButton
-          href="/rss.xml"
-          class="rounded border border-border px-4 py-2 no-underline hover:border-accent"
-          ariaLabel="RSS feed"
-          title="RSS Feed"
-        >
-          RSS
-        </LinkButton>
-      </div> -->
       {
-        // only display if at least one social link is enabled
-        SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+        socials.length > 0 && (
+          <div class="mt-4 flex max-sm:flex-col sm:items-center">
             <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Links:</div>
             <Socials />
           </div>
@@ -85,60 +62,45 @@ const recentNotes = sortedNotes.slice(0, SITE.notesPerIndex);
       }
     </section>
 
-    <Hr />
-
-    {
-      /*
-      <section id="highlights" class="pt-12 pb-6">
-        <h2 class="text-2xl font-semibold tracking-wide">Highlights</h2>
-        <ul class="mt-4 list-disc ps-5">
-          <li>
-            <strong>Swedbank</strong> — Lead AI Engineer (Aug 2025–present):
-            platform patterns for GenAI apps; shipped a production RAG reference
-            implementation.
-          </li>
-          <li>
-            <strong>Handelsbanken</strong> — Lead MLOps Engineer (Nov 2022–Apr
-            2024): lifecycle patterns across train/deploy/schedule/monitor.
-          </li>
-          <li>
-            <strong>Hultafors Group</strong> — AI Engineer (Apr–Sep 2025):
-            multi-agent sales analysis system integrated with the data platform.
-          </li>
-        </ul>
-      </section>
-
-      <Hr />
-    */
-    }
-
     {
       featuredPosts.length > 0 && (
-        <>
-          <section id="featured" class="pt-12 pb-6">
-            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-            <ul>
-              {featuredPosts.map(data => (
-                <Card variant="h3" {...data} />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
+        <section
+          id="featured"
+          class:list={[
+            "pt-12 pb-6",
+            {
+              "border-border border-b":
+                recentNotes.length > 0 || recentPosts.length > 0,
+            },
+          ]}
+        >
+          <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
+          <ul>
+            {featuredPosts.map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+        </section>
       )
     }
 
     {
       recentNotes.length > 0 && (
-        <section id="recent-notes" class="pt-12 pb-6">
+        <section
+          id="recent-notes"
+          class:list={[
+            "pt-12 pb-6",
+            { "border-border border-b": recentPosts.length > 0 },
+          ]}
+        >
           <h2 class="text-2xl font-semibold tracking-wide">Latest Notes</h2>
           <ul>
             {recentNotes.map(data => (
               <NoteCard variant="h3" {...data} />
             ))}
           </ul>
-          <div class="mt-4 flex justify-center">
-            <LinkButton href="/notes/">
+          <div class="mt-4 text-center">
+            <LinkButton href={getRelativeLocaleUrl(locale, "notes")}>
               All Notes
               <IconArrowRight class="inline-block rtl:-rotate-180" />
             </LinkButton>
@@ -147,20 +109,17 @@ const recentNotes = sortedNotes.slice(0, SITE.notesPerIndex);
       )
     }
 
-    {recentPosts.length > 0 && recentNotes.length > 0 && <Hr />}
-
     {
       recentPosts.length > 0 && (
         <section id="recent-posts" class="pt-12 pb-6">
           <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
           <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} />
-            )}
+            {recentPosts.slice(0, postsConfig.perIndex).map(data => (
+              <Card variant="h3" {...data} />
+            ))}
           </ul>
-          <div class="mt-4 flex justify-center">
-            <LinkButton href="/posts/">
+          <div class="mt-4 text-center">
+            <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
               All Posts
               <IconArrowRight class="inline-block rtl:-rotate-180" />
             </LinkButton>
@@ -175,9 +134,10 @@ const recentNotes = sortedNotes.slice(0, SITE.notesPerIndex);
 <script>
   document.addEventListener("astro:page-load", () => {
     const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset?.layout;
-    if (indexLayout) {
-      sessionStorage.setItem("backUrl", "/");
+      ?.dataset;
+    const baseRoot = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+    if (indexLayout?.layout) {
+      sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
     }
   });
 </script>

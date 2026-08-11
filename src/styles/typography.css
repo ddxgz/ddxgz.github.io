@@ -1,4 +1,4 @@
-@plugin '@tailwindcss/typography';
+@plugin "@tailwindcss/typography";
 
 @layer base {
   /* ===== Override default Tailwind Typography styles ===== */
@@ -10,7 +10,7 @@
     h3,
     h4,
     th {
-      @apply mb-3 text-foreground;
+      @apply text-foreground mb-3;
     }
 
     h3 {
@@ -28,14 +28,14 @@
     }
 
     a {
-      @apply break-words text-foreground decoration-dashed underline-offset-4 hover:text-accent focus-visible:no-underline;
+      @apply text-foreground hover:text-accent wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
     }
 
     ul {
       @apply overflow-x-clip;
     }
 
-    /* Prevent migrated notebook HTML (tables/iframes) from blowing out page width */
+    /* Keep notebook exports and embedded demos within the article width. */
     @apply overflow-x-hidden;
 
     iframe {
@@ -43,7 +43,6 @@
       max-width: 100%;
     }
 
-    /* Pandas/Jupyter HTML tables frequently come with `.dataframe` wrappers */
     .dataframe {
       @apply max-w-full overflow-x-auto;
     }
@@ -57,7 +56,15 @@
     }
 
     img {
-      @apply mx-auto border border-border;
+      @apply border-border mx-auto border;
+    }
+
+    img[role="button"] {
+      @apply cursor-zoom-in;
+
+      &:focus-visible {
+        @apply outline-2 outline-offset-2 outline-dashed;
+      }
     }
 
     figcaption {
@@ -73,7 +80,7 @@
 
       th,
       td {
-        @apply border border-border p-2;
+        @apply border-border border p-2;
       }
 
       th {
@@ -86,7 +93,7 @@
     }
 
     code {
-      @apply rounded bg-muted/75 p-1 break-words text-foreground before:content-none after:content-none;
+      @apply bg-muted/75 text-foreground rounded p-1 wrap-break-word before:content-none after:content-none;
     }
 
     .astro-code code {
@@ -94,15 +101,15 @@
     }
 
     blockquote {
-      @apply border-s-accent/80 break-words opacity-80;
+      @apply border-s-accent/80 wrap-break-word opacity-80;
     }
 
-    details {
-      @apply my-4 w-full rounded border border-border bg-muted/25 px-4 py-3;
+    details:not(.callout) {
+      @apply border-border bg-muted/25 my-4 w-full rounded border px-4 py-3;
     }
 
     summary {
-      @apply cursor-pointer text-foreground select-none focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent focus-visible:outline-dashed;
+      @apply text-foreground focus-visible:outline-accent cursor-pointer select-none focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed;
     }
 
     details[open] summary {
@@ -110,13 +117,13 @@
     }
 
     pre {
-      @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
+      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed;
     }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply flex border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
+    @apply outline-border flex border bg-(--shiki-light-bg) text-(--shiki-light) [&_span]:text-(--shiki-light);
   }
 
   html[data-theme="dark"] .astro-code {
@@ -136,7 +143,7 @@
       @apply inline-block w-full bg-slate-400/20;
     }
     .highlighted-word {
-      @apply rounded-sm border border-border px-0.5 py-px;
+      @apply border-border rounded-sm border px-0.5 py-px;
     }
   }
 }

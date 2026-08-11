@@ -1,11 +1,3 @@
-.playwright-cli/
-output/
-.tmp/
-
-# local Python tooling for one-off graphics scripts
-.venv-diagram/
-.mplconfig/
-
 # build output
 dist/
 
@@ -33,3 +25,9 @@ pnpm-debug.log*
 
 # pagefind
 public/pagefind
+
+# pnpm
+.pnpm-store
+
+# docker compose
+compose.override.yaml

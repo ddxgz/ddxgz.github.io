@@ -1,16 +1,17 @@
 ---
 import { render, type CollectionEntry } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
-import ShareLinks from "@/components/ShareLinks.astro";
-import BackButton from "@/components/BackButton.astro";
-import BackToTopButton from "@/components/BackToTopButton.astro";
+import ShareLinks from "@/pages/posts/[...slug]/_components/ShareLinks.astro";
+import BackButton from "@/pages/posts/[...slug]/_components/BackButton.astro";
+import BackToTopButton from "@/pages/posts/[...slug]/_components/BackToTopButton.astro";
 import { slugifyStr } from "@/utils/slugify";
-import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
-import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
-import { SITE } from "@/config";
+import IconArrowLeft from "@/assets/icons/IconArrowLeft.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import config from "@/config";
 
 export interface Props {
   post: CollectionEntry<"notes">;
@@ -21,7 +22,6 @@ const { post, posts } = Astro.props;
 
 const {
   title,
-  author,
   description,
   canonicalURL,
   pubDatetime,
@@ -33,14 +33,14 @@ const {
 const { Content } = await render(post);
 
 const layoutProps = {
-  title: `${title} | ${SITE.title}`,
-  author,
+  title: `${title} | ${config.site.title}`,
   description,
   pubDatetime,
   modDatetime,
   canonicalURL,
-  scrollSmooth: true,
 };
+
+const locale = Astro.currentLocale ?? config.site.lang;
 
 const allPosts = posts.map(({ data: { title }, id }) => ({
   id,
@@ -55,20 +55,20 @@ const nextPost =
     : null;
 ---
 
-<Layout {...layoutProps}>
+<PostLayout {...layoutProps}>
   <Header />
   <BackButton />
   <main
     id="main-content"
     class:list={[
-      "mx-auto w-full max-w-app px-4 pb-12",
-      { "mt-8": !SITE.showBackButton },
+      "app-layout pb-12",
+      { "mt-8": !config.features.showBackButton },
     ]}
     data-pagefind-body
   >
     <h1
       transition:name={slugifyStr(title)}
-      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+      class="text-accent inline-block text-2xl font-bold sm:text-3xl"
     >
       {title}
     </h1>
@@ -83,7 +83,7 @@ const nextPost =
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 rounded border border-accent/40 px-2 py-1 text-sm text-accent hover:bg-accent/10"
+              class="border-accent/40 text-accent hover:bg-accent/10 inline-flex items-center gap-1 rounded border px-2 py-1 text-sm"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +107,7 @@ const nextPost =
     }
     <article
       id="article"
-      class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
+      class="app-prose max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg) mx-auto mt-8"
     >
       <Content />
     </article>
@@ -124,13 +124,13 @@ const nextPost =
       {
         prevPost && (
           <a
-            href={`/notes/${prevPost.id}/`}
+            href={getRelativeLocaleUrl(locale, `notes/${prevPost.id}`)}
             class="flex w-full gap-1 hover:opacity-75"
           >
-            <IconChevronLeft class="inline-block flex-none rtl:rotate-180" />
+            <IconArrowLeft class="inline-block flex-none rtl:rotate-180" />
             <div>
               <span>Previous Note</span>
-              <div class="text-sm text-accent/85">{prevPost.title}</div>
+              <div class="text-accent/85 text-sm">{prevPost.title}</div>
             </div>
           </a>
         )
@@ -138,53 +138,18 @@ const nextPost =
       {
         nextPost && (
           <a
-            href={`/notes/${nextPost.id}/`}
+            href={getRelativeLocaleUrl(locale, `notes/${nextPost.id}`)}
             class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
           >
             <div>
               <span>Next Note</span>
-              <div class="text-sm text-accent/85">{nextPost.title}</div>
+              <div class="text-accent/85 text-sm">{nextPost.title}</div>
             </div>
-            <IconChevronRight class="inline-block flex-none rtl:rotate-180" />
+            <IconArrowRight class="inline-block flex-none rtl:rotate-180" />
           </a>
         )
       }
     </div>
   </main>
   <Footer />
-</Layout>
-
-<script is:inline data-astro-rerun>
-  function createProgressBar() {
-    const progressContainer = document.createElement("div");
-    progressContainer.className =
-      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
-
-    const progressBar = document.createElement("div");
-    progressBar.className = "progress-bar h-1 w-0 bg-accent";
-    progressBar.id = "myBar";
-
-    progressContainer.appendChild(progressBar);
-    document.body.appendChild(progressContainer);
-  }
-  createProgressBar();
-
-  function updateScrollProgress() {
-    document.addEventListener("scroll", () => {
-      const winScroll =
-        document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      if (document) {
-        const myBar = document.getElementById("myBar");
-        if (myBar) {
-          myBar.style.width = scrolled + "%";
-        }
-      }
-    });
-  }
-
-  updateScrollProgress();
-</script>
+</PostLayout>
