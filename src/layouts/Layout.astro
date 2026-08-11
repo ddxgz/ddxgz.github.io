@@ -13,6 +13,7 @@ type Props = {
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
+  ogType?: "website" | "article";
 };
 
 const { site } = config;
@@ -22,6 +23,7 @@ const {
   description = site.description,
   ogImage = resolveDefaultOgImagePath(config),
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  ogType = "website",
 } = Astro.props;
 
 const socialImageURL = new URL(ogImage, Astro.site ?? Astro.url);
@@ -60,7 +62,7 @@ const llmsHref = getRelativeLocaleUrl(locale, "llms.txt");
     <link rel="sitemap" href={getAssetPath("sitemap-index.xml")} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.title} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -129,7 +131,7 @@ const llmsHref = getRelativeLocaleUrl(locale, "llms.txt");
       Inline FOUC-prevention script: sets data-theme on <html> before
       the browser paints. Runs synchronously, no defer/async.
     -->
-    <script is:inline>
+    <script is:inline data-astro-rerun>
       (function () {
         const stored = localStorage.getItem("theme");
         const prefersDark = window.matchMedia(
@@ -143,6 +145,57 @@ const llmsHref = getRelativeLocaleUrl(locale, "llms.txt");
         window.__theme = { value: theme };
       })();
     </script>
+
+    <!-- Preserve formula rendering for existing Markdown posts. -->
+    <script is:inline>
+      window.MathJax = window.MathJax || {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+        chtml: {
+          adaptiveCSS: false,
+        },
+        options: {
+          skipHtmlTags: [
+            "script",
+            "noscript",
+            "style",
+            "textarea",
+            "pre",
+            "code",
+          ],
+        },
+      };
+
+      if (!window.__mathJaxPageLoadBound) {
+        window.__mathJaxPageLoadBound = true;
+        const persistMathJaxStyles = () => {
+          document
+            .querySelector("#MJX-CHTML-styles")
+            ?.setAttribute("data-astro-transition-persist", "mathjax");
+        };
+
+        document.addEventListener("astro:before-swap", () => {
+          persistMathJaxStyles();
+          window.MathJax?.typesetClear?.();
+        });
+        document.addEventListener("astro:page-load", async () => {
+          await window.MathJax?.typesetPromise?.();
+          persistMathJaxStyles();
+        });
+      }
+    </script>
+    <script
+      is:inline
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <ClientRouter />
   </head>
