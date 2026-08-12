@@ -10,6 +10,7 @@ import "@/styles/global.css";
 
 type Props = {
   title?: string;
+  author?: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
@@ -20,6 +21,7 @@ const { site } = config;
 
 const {
   title = site.title,
+  author = site.author,
   description = site.description,
   ogImage = resolveDefaultOgImagePath(config),
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
@@ -56,7 +58,7 @@ const llmsHref = getRelativeLocaleUrl(locale, "llms.txt");
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="author" content={site.author} />
+    <meta name="author" content={author} />
     <meta name="robots" content={siteExtensions.seo.robots} />
     <link rel="sitemap" href={getAssetPath("sitemap-index.xml")} />
 

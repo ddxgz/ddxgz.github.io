@@ -5,6 +5,7 @@ import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
+import ReadingProgress from "@/components/ReadingProgress.astro";
 import ShareLinks from "@/pages/posts/[...slug]/_components/ShareLinks.astro";
 import BackButton from "@/pages/posts/[...slug]/_components/BackButton.astro";
 import BackToTopButton from "@/pages/posts/[...slug]/_components/BackToTopButton.astro";
@@ -58,6 +59,7 @@ const nextPost =
 ---
 
 <PostLayout {...layoutProps}>
+  <ReadingProgress />
   <Header />
   <BackButton />
   <main
