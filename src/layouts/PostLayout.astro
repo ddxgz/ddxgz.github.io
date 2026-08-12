@@ -4,6 +4,8 @@ import config from "@/config";
 
 type Props = {
   title?: string;
+  author?: string;
+  profile?: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
@@ -13,8 +15,19 @@ type Props = {
 
 const { site } = config;
 
-const { title, description, ogImage, canonicalURL, pubDatetime, modDatetime } =
-  Astro.props;
+const {
+  title,
+  author = site.author,
+  profile,
+  description,
+  ogImage,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+} = Astro.props;
+
+const authorProfile =
+  profile ?? (author === site.author ? site.profile : undefined);
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -26,8 +39,8 @@ const structuredData = {
   author: [
     {
       "@type": "Person",
-      name: site.author,
-      ...(site.profile && { url: site.profile }),
+      name: author,
+      ...(authorProfile && { url: authorProfile }),
     },
   ],
 };
