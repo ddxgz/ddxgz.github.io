@@ -29,6 +29,19 @@ const {
 } = Astro.props;
 
 const socialImageURL = new URL(ogImage, Astro.site ?? Astro.url);
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  headline: title,
+  image: socialImageURL.href,
+  author: [
+    {
+      "@type": "Person",
+      name: author,
+      ...(author === site.author && site.profile && { url: site.profile }),
+    },
+  ],
+};
 const locale = Astro.currentLocale ?? config.site.lang;
 const rssHref = getRelativeLocaleUrl(locale, "rss.xml");
 const aiHref = getRelativeLocaleUrl(locale, "ai.txt");
@@ -115,6 +128,16 @@ const llmsHref = getRelativeLocaleUrl(locale, "llms.txt");
 
     <!-- Filled at runtime by theme.ts to match the current background colour -->
     <meta name="theme-color" content="" />
+
+    {
+      ogType === "website" && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(websiteStructuredData)}
+        />
+      )
+    }
 
     <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
     <slot name="head" />
