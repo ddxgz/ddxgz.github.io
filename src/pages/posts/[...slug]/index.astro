@@ -69,16 +69,20 @@ const {
   timezone,
   tags,
   hideEditPost,
+  links,
 } = post.data;
 
 const { Content } = await render(post);
 
 let ogImageUrl: string | undefined;
+let coverImageUrl: string | undefined;
 
 if (typeof initOgImage === "string") {
   ogImageUrl = initOgImage;
+  coverImageUrl = initOgImage;
 } else if (initOgImage?.src) {
   ogImageUrl = initOgImage.src;
+  coverImageUrl = initOgImage.src;
 }
 
 if (!ogImageUrl && config.features.dynamicOgImage) {
@@ -91,6 +95,9 @@ if (!ogImageUrl && config.features.dynamicOgImage) {
 
 const ogImage = ogImageUrl
   ? new URL(ogImageUrl, Astro.url.origin).href
+  : undefined;
+const coverImage = coverImageUrl
+  ? new URL(coverImageUrl, Astro.url.origin).href
   : undefined;
 ---
 
@@ -131,6 +138,52 @@ const ogImage = ogImageUrl
       </span>
       <EditPost {hideEditPost} {post} class="max-sm:hidden" />
     </div>
+
+    {
+      links && links.length > 0 && (
+        <div class="my-3 flex flex-wrap gap-2">
+          {links.map(link => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="border-accent/40 text-accent hover:bg-accent/10 inline-flex items-center gap-1 rounded border px-2 py-1 text-sm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                />
+              </svg>
+              {link.name}
+            </a>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      coverImage && (
+        <figure class="mt-6">
+          <img
+            src={coverImage}
+            alt={title}
+            loading="eager"
+            decoding="async"
+            class="w-full rounded-lg"
+          />
+        </figure>
+      )
+    }
 
     <article
       id="article"
