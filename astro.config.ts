@@ -19,18 +19,22 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
 
+const locale = config.site.lang ?? "en";
+
 export default defineConfig({
   site: config.site.url,
   integrations: [
     mdx(),
     sitemap({
       filter: page =>
-        config.features?.showArchives !== false || !page.endsWith("/archives/"),
+        (config.features?.showArchives !== false ||
+          !page.endsWith("/archives/")) &&
+        (config.features?.search !== false || !page.endsWith("/search/")),
     }),
   ],
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: [locale],
+    defaultLocale: locale,
     routing: {
       prefixDefaultLocale: false,
     },
