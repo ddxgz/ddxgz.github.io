@@ -13,7 +13,9 @@ const sections = [
     : []),
   { label: "Tags", path: "/tags/" },
   { label: "Publications", path: "/publications/" },
-  { label: "Search", path: "/search/" },
+  ...(config.features.search !== false
+    ? [{ label: "Search", path: "/search/" }]
+    : []),
 ];
 
 const resources = [
