@@ -1,16 +1,21 @@
 import type { APIRoute } from "astro";
-import { SITE } from "@/config";
+import config from "@/config";
+import { siteExtensions } from "@/site-extensions.config";
 
-const baseUrl = new URL(SITE.website);
+const baseUrl = new URL(config.site.url);
 const toUrl = (path: string) => new URL(path, baseUrl).href;
 
 const sections = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about/" },
-  ...(SITE.showArchives ? [{ label: "Archives", path: "/archives/" }] : []),
+  ...(config.features.showArchives
+    ? [{ label: "Archives", path: "/archives/" }]
+    : []),
   { label: "Tags", path: "/tags/" },
   { label: "Publications", path: "/publications/" },
-  { label: "Search", path: "/search/" },
+  ...(config.features.search !== false
+    ? [{ label: "Search", path: "/search/" }]
+    : []),
 ];
 
 const resources = [
@@ -19,7 +24,7 @@ const resources = [
   { label: "AI.txt", path: "/ai.txt" },
 ];
 
-const topics = SITE.llms.topics ?? [];
+const topics = siteExtensions.llms.topics;
 
 const getLlmsTxt = () => {
   const sectionLines = sections
@@ -33,14 +38,14 @@ const getLlmsTxt = () => {
   const topicLines =
     topics.length > 0 ? `\n## Topics\n- ${topics.join("\n- ")}\n` : "";
 
-  return `# ${SITE.title}
-> ${SITE.desc}
+  return `# ${config.site.title}
+> ${config.site.description}
 
 ## About
-- Website: ${SITE.website}
-- Language: ${SITE.lang ?? "en"}
-- Author: ${SITE.author}
-- Profile: ${SITE.profile}
+- Website: ${config.site.url}
+- Language: ${config.site.lang}
+- Author: ${config.site.author}
+- Profile: ${config.site.profile}
 
 ## About Me
 - Engineer / Architect / Builder based in Stockholm
@@ -58,7 +63,7 @@ ${topicLines}
 
 ## Usage
 - You may crawl and summarize public pages
-- Attribute content to ${SITE.title} and link to canonical URLs
+- Attribute content to ${config.site.title} and link to canonical URLs
 
 ## Resources
 ${resourceLines}

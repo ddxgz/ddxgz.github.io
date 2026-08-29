@@ -1,11 +1,11 @@
 import type { APIRoute } from "astro";
-import { SITE } from "@/config";
+import config from "@/config";
 
 const getRobotsTxt = () => `
 User-agent: *
 Allow: /
 
-Host: ${SITE.website}
+Host: ${config.site.url}
 `;
 
 export const GET: APIRoute = () => new Response(getRobotsTxt());

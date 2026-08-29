@@ -1,6 +1,8 @@
 ---
 import { slugifyStr } from "@/utils/slugify";
 import type { CollectionEntry } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import config from "@/config";
 import Datetime from "./Datetime.astro";
 
 export interface Props extends CollectionEntry<"notes"> {
@@ -10,6 +12,7 @@ export interface Props extends CollectionEntry<"notes"> {
 const { variant = "h2", data, id } = Astro.props;
 
 const { title, description, pubDatetime, modDatetime, timezone } = data;
+const locale = Astro.currentLocale ?? config.site.lang;
 
 const headerProps = {
   style: { viewTransitionName: slugifyStr(title) },
@@ -19,8 +22,8 @@ const headerProps = {
 
 <li class="my-6">
   <a
-    href={`/notes/${id}/`}
-    class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+    href={getRelativeLocaleUrl(locale, `notes/${id}`)}
+    class="text-accent inline-block text-lg font-medium decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
   >
     {
       variant === "h2" ? (

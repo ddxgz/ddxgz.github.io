@@ -1,14 +1,14 @@
 import type { APIRoute } from "astro";
-import { SITE } from "@/config";
+import config from "@/config";
 
 const getAiTxt = () => `# AI & LLM Access
-Site: ${SITE.website}
-Owner: ${SITE.author}
-Profile: ${SITE.profile}
+Site: ${config.site.url}
+Owner: ${config.site.author}
+Profile: ${config.site.profile}
 
 Preferred usage:
 - Crawl and index publicly accessible pages
-- Attribute content to ${SITE.title} and link to the canonical URL
+- Attribute content to ${config.site.title} and link to the canonical URL
 `;
 
 export const GET: APIRoute = () =>

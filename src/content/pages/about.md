@@ -1,6 +1,6 @@
 ---
-layout: ../layouts/AboutLayout.astro
 title: "About"
+description: "About Cong Peng, his consulting work, side projects, and publications."
 ---
 
 I’m Cong Peng, an Engineer / Architect / Builder based in Stockholm. I build agentic AI applications and the cloud data & AI platforms behind them. I lead architecture and hands-on implementation from MVP to production.

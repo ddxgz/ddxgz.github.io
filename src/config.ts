@@ -1,33 +1,41 @@
-export const SITE = {
-  website: "https://ddxgz.github.io",
-  author: "Cong Peng",
-  profile: "https://www.linkedin.com/in/cong-peng-pcx/",
-  desc: "A reboot for writing my notes and thoughts online after several years of pause.",
-  title: "Cong's Notes",
-  ogImage: "",
-  seo: {
-    robots:
-      "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
-    twitterSite: "",
-    twitterCreator: "",
+/**
+ * Internal resolved configuration used throughout the codebase.
+ *
+ * Prefer editing `astro-paper.config.ts` instead of this file. This module exists to
+ * apply defaults and expose a fully-resolved config shape (`ResolvedAstroPaperConfig`).
+ */
+import userConfig from "@/astro-paper.config";
+import type { ResolvedAstroPaperConfig } from "./types/config";
+import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
+
+const DEFAULT_OG_IMAGE = "default-og.jpg";
+
+const config: ResolvedAstroPaperConfig = {
+  site: {
+    ...userConfig.site,
+    ogImage: userConfig.site.ogImage ?? DEFAULT_OG_IMAGE,
+    lang: userConfig.site.lang ?? "en",
+    timezone: userConfig.site.timezone ?? "UTC",
+    dir: userConfig.site.dir ?? "ltr",
+    googleVerification:
+      userConfig.site.googleVerification || PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
-  llms: {
-    topics: ["engineering", "data", "AI", "agent", "machine learning", "notes"],
+  posts: {
+    perPage: userConfig.posts?.perPage ?? 4,
+    perIndex: userConfig.posts?.perIndex ?? 4,
+    scheduledPostMargin:
+      userConfig.posts?.scheduledPostMargin ?? 15 * 60 * 1000,
   },
-  lightAndDarkMode: true,
-  postPerIndex: 4,
-  notesPerIndex: 4,
-  postPerPage: 10,
-  scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
-  showArchives: true,
-  showBackButton: true, // show back button in post detail
-  editPost: {
-    enabled: false,
-    text: "Edit page",
-    url: "https://github.com/ddxgz/pcx-astro-paper-github/edit/main/",
+  features: {
+    lightAndDarkMode: userConfig.features?.lightAndDarkMode ?? true,
+    dynamicOgImage: userConfig.features?.dynamicOgImage ?? true,
+    showArchives: userConfig.features?.showArchives ?? true,
+    showBackButton: userConfig.features?.showBackButton ?? true,
+    editPost: userConfig.features?.editPost ?? { enabled: false },
+    search: userConfig.features?.search ?? "pagefind",
   },
-  dynamicOgImage: true,
-  dir: "ltr", // "rtl" | "auto"
-  lang: "en", // html lang code. Set this empty and default will be "en"
-  timezone: "Europe/Stockholm", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-} as const;
+  socials: userConfig.socials ?? [],
+  shareLinks: userConfig.shareLinks ?? [],
+};
+
+export default config;

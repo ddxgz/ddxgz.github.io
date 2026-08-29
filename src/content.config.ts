@@ -1,16 +1,17 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
-import { SITE } from "@/config";
+import config from "@/config";
 
-export const BLOG_PATH = "src/data/blog";
-export const NOTES_PATH = "src/data/notes";
-export const PUBLICATIONS_PATH = "src/data/publications";
+export const BLOG_PATH = "src/content/posts";
+export const NOTES_PATH = "src/content/notes";
+export const PUBLICATIONS_PATH = "src/content/publications";
 
-const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: `./${BLOG_PATH}` }),
+const posts = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${BLOG_PATH}` }),
   schema: ({ image }) =>
     z.object({
-      author: z.string().default(SITE.author),
+      author: z.string().default(config.site.author),
       pubDatetime: z.date(),
       modDatetime: z.date().optional().nullable(),
       title: z.string(),
@@ -22,17 +23,25 @@ const blog = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
-      links: z
-        .array(z.object({ name: z.string(), url: z.string().url() }))
-        .optional(),
+      links: z.array(z.object({ name: z.string(), url: z.url() })).optional(),
     }),
 });
 
+const pages = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/pages" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    ogImage: z.string().optional(),
+    canonicalURL: z.string().optional(),
+  }),
+});
+
 const notes = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: `./${NOTES_PATH}` }),
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${NOTES_PATH}` }),
   schema: ({ image }) =>
     z.object({
-      author: z.string().default(SITE.author),
+      author: z.string().default(config.site.author),
       pubDatetime: z.date(),
       modDatetime: z.date().optional().nullable(),
       title: z.string(),
@@ -44,23 +53,24 @@ const notes = defineCollection({
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
       timezone: z.string().optional(),
-      links: z
-        .array(z.object({ name: z.string(), url: z.string().url() }))
-        .optional(),
+      links: z.array(z.object({ name: z.string(), url: z.url() })).optional(),
     }),
 });
 
 const publications = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: `./${PUBLICATIONS_PATH}` }),
+  loader: glob({
+    pattern: "**/[^_]*.{md,mdx}",
+    base: `./${PUBLICATIONS_PATH}`,
+  }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
     pubDatetime: z.date(),
     authors: z.array(z.string()).default([]),
     type: z.string().optional(),
-    pdfUrl: z.string().url().optional(),
-    doiUrl: z.string().url().optional(),
+    pdfUrl: z.url().optional(),
+    doiUrl: z.url().optional(),
   }),
 });
 
-export const collections = { blog, notes, publications };
+export const collections = { posts, pages, notes, publications };

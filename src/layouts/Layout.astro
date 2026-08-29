@@ -1,138 +1,178 @@
 ---
+import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
-import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
-import { SITE } from "@/config";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
+import { getAssetPath } from "@/utils/withBase";
+import config from "@/config";
+import { siteExtensions } from "@/site-extensions.config";
 import "@/styles/global.css";
 
-export interface Props {
+type Props = {
   title?: string;
   author?: string;
-  profile?: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
-  pubDatetime?: Date;
-  modDatetime?: Date | null;
-  scrollSmooth?: boolean;
-}
+  ogType?: "website" | "article";
+};
+
+const { site } = config;
 
 const {
-  title = SITE.title,
-  author = SITE.author,
-  profile = SITE.profile,
-  description = SITE.desc,
-  ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
-  canonicalURL = new URL(Astro.url.pathname, Astro.url),
-  pubDatetime,
-  modDatetime,
-  scrollSmooth = false,
+  title = site.title,
+  author = site.author,
+  description = site.description,
+  ogImage = resolveDefaultOgImagePath(config),
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  ogType = "website",
 } = Astro.props;
 
-const socialImageURL = new URL(ogImage, Astro.url);
-const ogType = pubDatetime ? "article" : "website";
-
-const structuredData = {
+const socialImageURL = new URL(ogImage, Astro.site ?? Astro.url);
+const websiteStructuredData = {
   "@context": "https://schema.org",
-  "@type": pubDatetime ? "BlogPosting" : "WebSite",
-  headline: `${title}`,
-  image: `${socialImageURL}`,
-  ...(pubDatetime && { datePublished: pubDatetime.toISOString() }),
-  ...(modDatetime && { dateModified: modDatetime.toISOString() }),
+  "@type": "WebSite",
+  headline: title,
+  image: socialImageURL.href,
   author: [
     {
       "@type": "Person",
-      name: `${author}`,
-      ...(profile && { url: profile }),
+      name: author,
+      ...(author === site.author && site.profile && { url: site.profile }),
     },
   ],
 };
+const locale = Astro.currentLocale ?? config.site.lang;
+const rssHref = getRelativeLocaleUrl(locale, "rss.xml");
+const aiHref = getRelativeLocaleUrl(locale, "ai.txt");
+const llmsHref = getRelativeLocaleUrl(locale, "llms.txt");
 ---
 
 <!doctype html>
 <html
-  dir={SITE.dir}
-  lang=`${SITE.lang ?? "en"}`
-  class={`${scrollSmooth && "scroll-smooth"}`}
+  dir={site.dir ?? "ltr"}
+  lang={Astro.currentLocale ?? site.lang}
+  class="overflow-y-scroll scroll-smooth"
 >
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={getAssetPath("favicon.svg")} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- General Meta Tags -->
+    <!-- Font -->
+    <Font
+      cssVariable="--font-google-sans-code"
+      preload={[{ subset: "latin", weight: 400, style: "normal" }]}
+    />
+
+    <!-- Primary meta -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
-    {SITE.seo.robots && <meta name="robots" content={SITE.seo.robots} />}
-    <link rel="alternate" type="text/plain" title="LLMs" href="/llms.txt" />
-    <link rel="alternate" type="text/plain" title="AI" href="/ai.txt" />
+    <meta name="robots" content={siteExtensions.seo.robots} />
+    <link rel="sitemap" href={getAssetPath("sitemap-index.xml")} />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.title} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
-    <meta property="og:site_name" content={SITE.title} />
-    <meta property="og:type" content={ogType} />
 
-    <!-- Article Published/Modified time -->
-    {
-      pubDatetime && (
-        <meta
-          property="article:published_time"
-          content={pubDatetime.toISOString()}
-        />
-      )
-    }
-    {
-      modDatetime && (
-        <meta
-          property="article:modified_time"
-          content={modDatetime.toISOString()}
-        />
-      )
-    }
-
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={socialImageURL} />
     {
-      SITE.seo.twitterSite && (
-        <meta name="twitter:site" content={SITE.seo.twitterSite} />
+      siteExtensions.seo.twitterSite && (
+        <meta
+          property="twitter:site"
+          content={siteExtensions.seo.twitterSite}
+        />
       )
     }
     {
-      SITE.seo.twitterCreator && (
-        <meta name="twitter:creator" content={SITE.seo.twitterCreator} />
+      siteExtensions.seo.twitterCreator && (
+        <meta
+          property="twitter:creator"
+          content={siteExtensions.seo.twitterCreator}
+        />
       )
     }
 
-    <!-- Google JSON-LD Structured data -->
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify(structuredData)}
-    />
-
-    <!-- Enable RSS feed auto-discovery  -->
-    <!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery -->
+    <!-- RSS autodiscovery -->
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={SITE.title}
-      href={new URL("rss.xml", Astro.site)}
+      title={site.title}
+      href={new URL(rssHref, Astro.site)}
+    />
+    <link
+      rel="alternate"
+      type="text/plain"
+      title={`${site.title} AI access guidance`}
+      href={new URL(aiHref, Astro.site)}
+    />
+    <link
+      rel="alternate"
+      type="text/plain"
+      title={`${site.title} LLM index`}
+      href={new URL(llmsHref, Astro.site)}
     />
 
+    <!-- Filled at runtime by theme.ts to match the current background colour -->
     <meta name="theme-color" content="" />
 
+    {
+      ogType === "website" && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(websiteStructuredData)}
+        />
+      )
+    }
+
+    <!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->
+    <slot name="head" />
+
+    {
+      site.googleVerification && (
+        <meta
+          name="google-site-verification"
+          content={site.googleVerification}
+        />
+      )
+    }
+
+    <!--
+      Inline FOUC-prevention script: sets data-theme on <html> before
+      the browser paints. Runs synchronously, no defer/async.
+    -->
+    <script is:inline data-astro-rerun>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const theme = stored ?? (prefersDark ? "dark" : "light");
+        const root = document.firstElementChild;
+        root?.setAttribute("data-theme", theme);
+        root?.classList.toggle("dark", theme === "dark");
+        // Expose value so theme.ts can skip re-detection.
+        window.__theme = { value: theme };
+      })();
+    </script>
+
+    <!-- Preserve formula rendering for existing Markdown posts. -->
     <script is:inline>
-      window.MathJax = {
+      window.MathJax = window.MathJax || {
         tex: {
           inlineMath: [
             ["$", "$"],
@@ -142,6 +182,9 @@ const structuredData = {
             ["$$", "$$"],
             ["\\[", "\\]"],
           ],
+        },
+        chtml: {
+          adaptiveCSS: false,
         },
         options: {
           skipHtmlTags: [
@@ -154,51 +197,58 @@ const structuredData = {
           ],
         },
       };
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-    ></script>
 
-    {
-      // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
-      // include google-site-verification tag in the heading
-      // Learn more: https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag
-      PUBLIC_GOOGLE_SITE_VERIFICATION && (
-        <meta
-          name="google-site-verification"
-          content={PUBLIC_GOOGLE_SITE_VERIFICATION}
-        />
-      )
-    }
+      if (!window.__mathJaxPageLoadBound) {
+        window.__mathJaxPageLoadBound = true;
+        const persistMathJaxStyles = () => {
+          document
+            .querySelector("#MJX-CHTML-styles")
+            ?.setAttribute("data-astro-transition-persist", "mathjax");
+        };
+
+        document.addEventListener("astro:before-swap", () => {
+          persistMathJaxStyles();
+          window.MathJax?.typesetClear?.();
+        });
+        document.addEventListener("astro:page-load", async () => {
+          await window.MathJax?.typesetPromise?.();
+          persistMathJaxStyles();
+        });
+      }
+    </script>
+    <script
+      is:inline
+      defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <ClientRouter />
+  </head>
+  <body
+    class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"
+  >
+    <slot />
+    <script>
+      import "@/scripts/theme";
 
-    <script is:inline src="/toggle-theme.js"></script>
-    <script is:inline>
       window.addEventListener("message", event => {
-        const data = event.data;
-        if (!data || data.type !== "vega-embed:resize") return;
-        const height = Number(data.height);
-        if (!Number.isFinite(height) || height <= 0) return;
-        const iframes = document.querySelectorAll("iframe");
-        for (const iframe of iframes) {
-          if (iframe.contentWindow === event.source) {
-            iframe.style.height = `${Math.ceil(height)}px`;
-            break;
-          }
+        if (
+          event.origin !== window.location.origin ||
+          event.data?.type !== "vega-embed:resize"
+        ) {
+          return;
         }
+
+        const height = Number(event.data.height);
+        if (!Number.isFinite(height) || height <= 0) return;
+
+        const iframe = Array.from(
+          document.querySelectorAll<HTMLIFrameElement>(
+            'iframe[src^="/vega/embed.html"]'
+          )
+        ).find(candidate => candidate.contentWindow === event.source);
+
+        if (iframe) iframe.style.height = `${Math.ceil(height)}px`;
       });
     </script>
-  </head>
-  <body>
-    <slot />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

@@ -1,31 +1,53 @@
-import { defineConfig, envField } from "astro/config";
+import {
+  defineConfig,
+  envField,
+  fontProviders,
+  svgoOptimizer,
+} from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
+import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import rehypeCallouts from "rehype-callouts";
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
-import { SITE } from "./src/config";
+import config from "./astro-paper.config";
 
-// https://astro.build/config
+const locale = config.site.lang ?? "en";
+
 export default defineConfig({
-  site: SITE.website,
-  // Uncomment the following line when deploying to GitHub Pages
-  // base: '/pcx-astro-paper-github',
-  base: "/",
+  site: config.site.url,
   integrations: [
+    mdx(),
     sitemap({
-      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      filter: page =>
+        (config.features?.showArchives !== false ||
+          !page.endsWith("/archives/")) &&
+        (config.features?.search !== false || !page.endsWith("/search/")),
     }),
   ],
+  i18n: {
+    locales: [locale],
+    defaultLocale: locale,
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
+    processor: unified({
+      remarkPlugins: [
+        remarkToc,
+        [remarkCollapse, { test: "Table of contents" }],
+      ],
+      rehypePlugins: [rehypeCallouts],
+    }),
     shikiConfig: {
-      // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
       defaultColor: false,
       wrap: false,
@@ -38,19 +60,19 @@ export default defineConfig({
     },
   },
   vite: {
-    // eslint-disable-next-line
-    // @ts-ignore
-    // This will be fixed in Astro 6 with Vite 7 support
-    // See: https://github.com/withastro/astro/issues/14030
     plugins: [tailwindcss()],
-    optimizeDeps: {
-      exclude: ["@resvg/resvg-js"],
+  },
+  fonts: [
+    {
+      name: "Google Sans Code",
+      cssVariable: "--font-google-sans-code",
+      provider: fontProviders.google(),
+      fallbacks: ["monospace"],
+      weights: [300, 400, 500, 600, 700],
+      styles: ["normal", "italic"],
+      formats: ["woff", "ttf"],
     },
-  },
-  image: {
-    responsiveStyles: true,
-    layout: "constrained",
-  },
+  ],
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
@@ -61,6 +83,6 @@ export default defineConfig({
     },
   },
   experimental: {
-    preserveScriptOrder: true,
+    svgOptimizer: svgoOptimizer(),
   },
 });
